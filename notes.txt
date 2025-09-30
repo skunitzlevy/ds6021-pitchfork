@@ -1,0 +1,28 @@
+Numerical:
+- Review score
+- Length of review
+- How many links in the review
+- Difference (in yrs) between review date and album date (0 for most)
+- Word-specific counts(?)
+
+Categorical:
+- Artist
+- Genre
+- Music Label
+- Reviewer
+- Reissue or not (1/0)
+- Review # of reviews
+- Artist # of albums
+
+Time:
+- Review date
+- Album year
+
+Spotify API (potential):
+- Artist Followers
+- # of tracks in the album
+
+Hypotheses:
+- Reviewer toughness
+- Genre averages are different
+- Avg score of surrounding reviews +- window (theory: they can’t put out too many good reviews in a row)

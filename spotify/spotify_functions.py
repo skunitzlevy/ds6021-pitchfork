@@ -94,3 +94,16 @@ def get_related_artists(artist_id, access_token):
     response = requests.get(url, headers=headers)
     data = response.json()
     return data.get('artists', [])
+
+
+def get_artist_info(artist_id, access_token):
+    '''Get detailed information for a given artist ID.'''
+    url = f"https://api.spotify.com/v1/artists/{artist_id}"
+    headers = {
+        "Authorization": f"Bearer {access_token}"
+    }
+    response = requests.get(url, headers=headers)
+    data = response.json()
+    # Save to a dataframe
+    artist_info_df = pd.DataFrame([data])
+    return artist_info_df

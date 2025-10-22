@@ -1,6 +1,7 @@
 import json
 import requests
 import os
+import pandas as pd
 
 url = "https://accounts.spotify.com/api/token"
 headers = {
@@ -8,8 +9,8 @@ headers = {
 }
 data = {
     "grant_type": "client_credentials",
-    "client_id": "66f124b9979b4f5ebf458d45baada331",
-    "client_secret": "0d69736f761447859ed094b32818b0b0"
+    "client_id": "512c04e69d75438fa0bc9eafc6161bff",
+    "client_secret": "3cc9d762a3634d528634fb63ad91ce33"
 }
 
 response = requests.post(url, headers=headers, data=data)

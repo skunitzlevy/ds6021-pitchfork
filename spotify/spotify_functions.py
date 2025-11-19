@@ -9,6 +9,14 @@ from tqdm import tqdm
 
 load_dotenv()
 
+# Get new get_access_token every 30 minutes to avoid timeout
+def new_access_token():
+    for _minutes in range(30, 181, 30): # Refresh every 30 minutes up to 3 hours
+        time.sleep(_minutes * 60) # Sleep for _minutes
+        global access_token
+        access_token = get_access_token()
+        # New access token refereshed
+
 def get_access_token():
     '''Get a fresh Spotify access token.'''
     url = "https://accounts.spotify.com/api/token"
@@ -44,9 +52,30 @@ def get_artist_id(artist_name, access_token):
         "type": "artist",
         "limit": 1
     }
-    response = requests.get(url, headers=headers, params=params)
-    data = response.json()
-    if data['artists']['items']:
+    response = requests.get(url, headers=headers, params=params, timeout=10)
+
+    # Check HTTP status code
+    if not response.ok:
+        if response.status_code == 401:
+            raise RuntimeError("Unauthorized: access token may be invalid or expired")
+        elif response.status_code == 429:
+            retry_after = response.headers.get("Retry-After", "unknown")
+            raise RuntimeError(f"Rate limited (HTTP 429). Retry-After: {retry_after} seconds")
+        else:
+            raise RuntimeError(f"HTTP {response.status_code} error: {response.text[:200]}")
+
+    # Check if response body is empty
+    if not response.text or not response.text.strip():
+        return None
+
+    # Parse JSON safely
+    try:
+        data = response.json()
+    except json.JSONDecodeError as e:
+        snippet = response.text[:200] if len(response.text) > 200 else response.text
+        raise RuntimeError(f"Failed to parse JSON: {e}. Response: {snippet}")
+
+    if data.get('artists', {}).get('items'):
         return data['artists']['items'][0]['id']
     else:
         return None
@@ -68,8 +97,29 @@ def get_artist_albums(artist_id, access_token):
         "include_groups": "album,single",
         "limit": 50 # Spotify API max limit is 50
     }
-    response = requests.get(url, headers=headers, params=params)
-    data = response.json()
+    response = requests.get(url, headers=headers, params=params, timeout=10)
+
+    # Check HTTP status code
+    if not response.ok:
+        if response.status_code == 401:
+            raise RuntimeError("Unauthorized: access token may be invalid or expired")
+        elif response.status_code == 429:
+            retry_after = response.headers.get("Retry-After", "unknown")
+            raise RuntimeError(f"Rate limited (HTTP 429). Retry-After: {retry_after} seconds")
+        else:
+            raise RuntimeError(f"HTTP {response.status_code} error: {response.text[:200]}")
+
+    # Check if response body is empty
+    if not response.text or not response.text.strip():
+        return []
+
+    # Parse JSON safely
+    try:
+        data = response.json()
+    except json.JSONDecodeError as e:
+        snippet = response.text[:200] if len(response.text) > 200 else response.text
+        raise RuntimeError(f"Failed to parse JSON: {e}. Response: {snippet}")
+
     return data.get('items', [])
 
 
@@ -83,8 +133,29 @@ def get_album_tracks(album_id, access_token):
     params = {
         "limit": 50 # Spotify API max limit is 50
     }
-    response = requests.get(url, headers=headers, params=params)
-    data = response.json()
+    response = requests.get(url, headers=headers, params=params, timeout=10)
+
+    # Check HTTP status code
+    if not response.ok:
+        if response.status_code == 401:
+            raise RuntimeError("Unauthorized: access token may be invalid or expired")
+        elif response.status_code == 429:
+            retry_after = response.headers.get("Retry-After", "unknown")
+            raise RuntimeError(f"Rate limited (HTTP 429). Retry-After: {retry_after} seconds")
+        else:
+            raise RuntimeError(f"HTTP {response.status_code} error: {response.text[:200]}")
+
+    # Check if response body is empty
+    if not response.text or not response.text.strip():
+        return []
+
+    # Parse JSON safely
+    try:
+        data = response.json()
+    except json.JSONDecodeError as e:
+        snippet = response.text[:200] if len(response.text) > 200 else response.text
+        raise RuntimeError(f"Failed to parse JSON: {e}. Response: {snippet}")
+
     return data.get('items', [])
 
 
@@ -95,8 +166,29 @@ def get_album_details(album_id, access_token):
     headers = {
         "Authorization": f"Bearer {access_token}"
     }
-    response = requests.get(url, headers=headers)
-    data = response.json()
+    response = requests.get(url, headers=headers, timeout=10)
+
+    # Check HTTP status code
+    if not response.ok:
+        if response.status_code == 401:
+            raise RuntimeError("Unauthorized: access token may be invalid or expired")
+        elif response.status_code == 429:
+            retry_after = response.headers.get("Retry-After", "unknown")
+            raise RuntimeError(f"Rate limited (HTTP 429). Retry-After: {retry_after} seconds")
+        else:
+            raise RuntimeError(f"HTTP {response.status_code} error: {response.text[:200]}")
+
+    # Check if response body is empty
+    if not response.text or not response.text.strip():
+        return {}
+
+    # Parse JSON safely
+    try:
+        data = response.json()
+    except json.JSONDecodeError as e:
+        snippet = response.text[:200] if len(response.text) > 200 else response.text
+        raise RuntimeError(f"Failed to parse JSON: {e}. Response: {snippet}")
+
     return data
 
 
@@ -106,8 +198,29 @@ def get_related_artists(artist_id, access_token):
     headers = {
         "Authorization": f"Bearer {access_token}"
     }
-    response = requests.get(url, headers=headers)
-    data = response.json()
+    response = requests.get(url, headers=headers, timeout=10)
+
+    # Check HTTP status code
+    if not response.ok:
+        if response.status_code == 401:
+            raise RuntimeError("Unauthorized: access token may be invalid or expired")
+        elif response.status_code == 429:
+            retry_after = response.headers.get("Retry-After", "unknown")
+            raise RuntimeError(f"Rate limited (HTTP 429). Retry-After: {retry_after} seconds")
+        else:
+            raise RuntimeError(f"HTTP {response.status_code} error: {response.text[:200]}")
+
+    # Check if response body is empty
+    if not response.text or not response.text.strip():
+        return []
+
+    # Parse JSON safely
+    try:
+        data = response.json()
+    except json.JSONDecodeError as e:
+        snippet = response.text[:200] if len(response.text) > 200 else response.text
+        raise RuntimeError(f"Failed to parse JSON: {e}. Response: {snippet}")
+
     return data.get('artists', [])
 
 # Heywood was here
@@ -118,8 +231,29 @@ def get_artist_info(artist_id, access_token):
     headers = {
         "Authorization": f"Bearer {access_token}"
     }
-    response = requests.get(url, headers=headers)
-    data = response.json()
+    response = requests.get(url, headers=headers, timeout=10)
+
+    # Check HTTP status code
+    if not response.ok:
+        if response.status_code == 401:
+            raise RuntimeError("Unauthorized: access token may be invalid or expired")
+        elif response.status_code == 429:
+            retry_after = response.headers.get("Retry-After", "unknown")
+            raise RuntimeError(f"Rate limited (HTTP 429). Retry-After: {retry_after} seconds")
+        else:
+            raise RuntimeError(f"HTTP {response.status_code} error: {response.text[:200]}")
+
+    # Check if response body is empty
+    if not response.text or not response.text.strip():
+        return pd.DataFrame()
+
+    # Parse JSON safely
+    try:
+        data = response.json()
+    except json.JSONDecodeError as e:
+        snippet = response.text[:200] if len(response.text) > 200 else response.text
+        raise RuntimeError(f"Failed to parse JSON: {e}. Response: {snippet}")
+
     # Save to a dataframe
     artist_info_df = pd.DataFrame([data])
     return artist_info_df
@@ -131,8 +265,29 @@ def get_artist_followers(artist_id, access_token):
     headers = {
         "Authorization": f"Bearer {access_token}"
     }
-    response = requests.get(url, headers=headers)
-    data = response.json()
+    response = requests.get(url, headers=headers, timeout=10)
+
+    # Check HTTP status code
+    if not response.ok:
+        if response.status_code == 401:
+            raise RuntimeError("Unauthorized: access token may be invalid or expired")
+        elif response.status_code == 429:
+            retry_after = response.headers.get("Retry-After", "unknown")
+            raise RuntimeError(f"Rate limited (HTTP 429). Retry-After: {retry_after} seconds")
+        else:
+            raise RuntimeError(f"HTTP {response.status_code} error: {response.text[:200]}")
+
+    # Check if response body is empty
+    if not response.text or not response.text.strip():
+        return None
+
+    # Parse JSON safely
+    try:
+        data = response.json()
+    except json.JSONDecodeError as e:
+        snippet = response.text[:200] if len(response.text) > 200 else response.text
+        raise RuntimeError(f"Failed to parse JSON: {e}. Response: {snippet}")
+
     return data.get('followers', {}).get('total', None)
 
 

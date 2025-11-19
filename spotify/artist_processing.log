@@ -1,0 +1,881 @@
+Loading artist_ids.csv...
+Found 5179 valid artists to process
+
+Authenticating with Spotify API...
+ Authentication successful
+
+Processing artists...
+This will take a while as we fetch album and track data for each artist.
+----------------------------------------------------------------------
+Processing:   0%|          | 0/5179 [00:00<?]Processing: Jeff Tweedy                        : :   0%|          | 0/5179 [00:00<?]Processing: Jeff Tweedy                        : :   0%|          | 1/5179 [00:19<27:53:20]Processing: Geese                              : :   0%|          | 1/5179 [00:21<27:53:20]Processing: Geese                              : :   0%|          | 2/5179 [00:30<20:31:33]Processing: Piotr Kurek                        : :   0%|          | 2/5179 [00:33<20:31:33]Processing: Piotr Kurek                        : :   0%|          | 3/5179 [00:44<20:19:02]Processing: Paul St. Hilaire                   : :   0%|          | 3/5179 [00:47<20:19:02]Processing: Paul St. Hilaire                   : :   0%|          | 4/5179 [01:04<23:56:23]Processing: Ø                                  : :   0%|          | 4/5179 [01:07<23:56:23]Processing: Ø                                  : :   0%|          | 5/5179 [01:50<39:17:31]Processing: Frost Children                     : :   0%|          | 5/5179 [01:53<39:17:31]Processing: Frost Children                     : :   0%|          | 6/5179 [02:34<47:26:29]Processing: múm                                : :   0%|          | 6/5179 [02:37<47:26:29]Processing: múm                                : :   0%|          | 7/5179 [02:58<43:08:57]Processing: Cardi B                            : :   0%|          | 7/5179 [03:02<43:08:57]Processing: Cardi B                            : :   0%|          | 8/5179 [03:49<52:40:56]Processing: Asher White                        : :   0%|          | 8/5179 [03:53<52:40:56]Processing: Asher White                        : :   0%|          | 9/5179 [04:19<49:32:17]Processing: Orcutt Shelley Miller              : :   0%|          | 9/5179 [04:21<49:32:17]Processing: Orcutt Shelley Miller              : :   0%|          | 10/5179 [04:24<36:38:47]Processing: Joanne Robertson                   : :   0%|          | 10/5179 [04:27<36:38:47]Processing: Joanne Robertson                   : :   0%|          | 11/5179 [04:39<31:53:30]Processing: Kieran Hebden                      : :   0%|          | 11/5179 [04:43<31:53:30]Processing: Kieran Hebden                      : :   0%|          | 12/5179 [04:53<28:20:40]Processing: JADE                               : :   0%|          | 12/5179 [04:56<28:20:40]Processing: JADE                               : :   0%|          | 13/5179 [05:18<30:22:00]Processing: Joan Shelley                       : :   0%|          | 13/5179 [05:20<30:22:00]Processing: Joan Shelley                       : :   0%|          | 14/5179 [05:44<32:46:42]Processing: Verses GT                          : :   0%|          | 14/5179 [05:47<32:46:42]Processing: Verses GT                          : :   0%|          | 15/5179 [05:53<26:46:39]Processing: Rian Treanor                       : :   0%|          | 15/5179 [05:56<26:46:39]Processing: Rian Treanor                       : :   0%|          | 16/5179 [06:12<26:46:25]Processing: The Jim Carroll Band               : :   0%|          | 16/5179 [06:14<26:46:25]Processing: The Jim Carroll Band               : :   0%|          | 17/5179 [06:17<21:02:07]Processing: Nine Inch Nails                    : :   0%|          | 17/5179 [06:20<21:02:07]Processing: Nine Inch Nails                    : :   0%|          | 18/5179 [06:56<31:32:29]Processing: Wednesday                          : :   0%|          | 18/5179 [06:58<31:32:29]Processing: Wednesday                          : :   0%|          | 19/5179 [07:07<26:43:44]Processing: King Princess                      : :   0%|          | 19/5179 [07:11<26:43:44]Processing: King Princess                      : :   0%|          | 20/5179 [07:41<33:04:32]                                                                                            Processing: King Princess                      : :   0%|          | 20/5179 [07:41<33:04:32]Processing: Anysia Kym                         : :   0%|          | 20/5179 [07:44<33:04:32]Processing: Anysia Kym                         : :   0%|          | 21/5179 [07:55<29:24:05]Processing: Lola Young                         : :   0%|          | 21/5179 [07:59<29:24:05]Processing: Lola Young                         : :   0%|          | 22/5179 [08:29<35:01:22]Processing: Maruja                             : :   0%|          | 22/5179 [08:31<35:01:22]Processing: Maruja                             : :   0%|          | 23/5179 [08:47<32:07:22]Processing: Ed Sheeran                         : :   0%|          | 23/5179 [08:49<32:07:22]Processing: Ed Sheeran                         : :   0%|          | 24/5179 [09:37<44:20:58]Processing: mark william lewis                 : :   0%|          | 24/5179 [09:40<44:20:58]Processing: mark william lewis                 : :   0%|          | 25/5179 [09:51<36:47:46]Processing: The Hidden Cameras                 : :   0%|          | 25/5179 [09:54<36:47:46]Processing: The Hidden Cameras                 : :   1%|          | 26/5179 [10:31<42:53:27]Processing: Jens Lekman                        : :   1%|          | 26/5179 [10:34<42:53:27]Processing: Jens Lekman                        : :   1%|          | 27/5179 [10:47<37:10:22]Processing: Oli XL                             : :   1%|          | 27/5179 [10:51<37:10:22]Processing: Oli XL                             : :   1%|          | 28/5179 [10:59<30:48:05]Processing: dolo2000                           : :   1%|          | 28/5179 [11:02<30:48:05]Processing: dolo2000                           : :   1%|          | 29/5179 [11:49<43:14:05]Processing: Twenty One Pilots                  : :   1%|          | 29/5179 [11:53<43:14:05]Processing: Twenty One Pilots                  : :   1%|          | 30/5179 [12:21<44:02:54]Processing: Liquid Mike                        : :   1%|          | 30/5179 [12:25<44:02:54]Processing: Liquid Mike                        : :   1%|          | 31/5179 [12:41<39:26:33]Processing: Ben Bondy                          : :   1%|          | 31/5179 [12:45<39:26:33]Processing: Ben Bondy                          : :   1%|          | 32/5179 [12:52<32:06:48]Processing: Phish                              : :   1%|          | 32/5179 [12:54<32:06:48]Processing: Phish                              : :   1%|          | 33/5179 [13:41<43:44:55]Processing: David Byrne                        : :   1%|          | 33/5179 [13:44<43:44:55]Processing: David Byrne                        : :   1%|          | 34/5179 [14:25<49:06:19]Processing: Algernon Cadwallader               : :   1%|          | 34/5179 [14:27<49:06:19]Processing: Algernon Cadwallader               : :   1%|          | 35/5179 [14:34<38:16:13]Processing: La Dispute                         : :   1%|          | 35/5179 [14:37<38:16:13]Processing: La Dispute                         : :   1%|          | 36/5179 [14:55<36:00:15]Processing: Titanic                            : :   1%|          | 36/5179 [14:57<36:00:15]Processing: Titanic                            : :   1%|          | 37/5179 [15:03<28:43:19]Processing: james K                            : :   1%|          | 37/5179 [15:06<28:43:19]Processing: james K                            : :   1%|          | 38/5179 [15:23<28:32:35]Processing: Flur                               : :   1%|          | 38/5179 [15:25<28:32:35]Processing: Flur                               : :   1%|          | 39/5179 [15:28<22:13:02]Processing: Jehnny Beth                        : :   1%|          | 39/5179 [15:31<22:13:02]Processing: Jehnny Beth                        : :   1%|          | 40/5179 [15:50<24:57:14]                                                                                            Processing: Jehnny Beth                        : :   1%|          | 40/5179 [15:50<24:57:14]Processing: Justin Bieber                      : :   1%|          | 40/5179 [15:53<24:57:14]Processing: Justin Bieber                      : :   1%|          | 41/5179 [16:40<38:53:18]Processing: Blood Orange                       : :   1%|          | 41/5179 [16:44<38:53:18]Processing: Blood Orange                       : :   1%|          | 42/5179 [17:13<41:13:40]Processing: Hayley Williams                    : :   1%|          | 42/5179 [17:16<41:13:40]Processing: Hayley Williams                    : :   1%|          | 43/5179 [17:43<41:31:23]Processing: Hot Chip                           : :   1%|          | 43/5179 [17:45<41:31:23]Processing: Hot Chip                           : :   1%|          | 44/5179 [18:32<50:05:25]Processing: Ghostface Killah                   : :   1%|          | 44/5179 [18:35<50:05:25]Processing: Ghostface Killah                   : :   1%|          | 45/5179 [19:26<58:26:16]Processing: Brian Dunne                        : :   1%|          | 45/5179 [19:29<58:26:16]Processing: Brian Dunne                        : :   1%|          | 46/5179 [19:54<52:43:15]Processing: Lucrecia Dalt                      : :   1%|          | 46/5179 [19:56<52:43:15]Processing: Lucrecia Dalt                      : :   1%|          | 47/5179 [20:14<45:18:43]Processing: Saint Etienne                      : :   1%|          | 47/5179 [20:16<45:18:43]Processing: Saint Etienne                      : :   1%|          | 48/5179 [20:54<48:53:36]Processing: Mariah the Scientist               : :   1%|          | 48/5179 [20:58<48:53:36]Processing: Mariah the Scientist               : :   1%|          | 49/5179 [21:26<47:53:46]Processing: Anna Domino                        : :   1%|          | 49/5179 [21:29<47:53:46]Processing: Anna Domino                        : :   1%|          | 50/5179 [21:36<37:53:36]Processing: Slipknot                           : :   1%|          | 50/5179 [21:40<37:53:36]Processing: Slipknot                           : :   1%|          | 51/5179 [21:58<35:56:19]Processing: Big Thief                          : :   1%|          | 51/5179 [22:01<35:56:19]Processing: Big Thief                          : :   1%|          | 52/5179 [22:18<33:25:23]Processing: Akasha System                      : :   1%|          | 52/5179 [22:20<33:25:23]Processing: Akasha System                      : :   1%|          | 53/5179 [22:43<34:16:06]Processing: Ami Taf Ra                         : :   1%|          | 53/5179 [22:47<34:16:06]Processing: Ami Taf Ra                         : :   1%|          | 54/5179 [22:51<27:30:48]Processing: Greg Freeman                       : :   1%|          | 54/5179 [22:54<27:30:48]Processing: Greg Freeman                       : :   1%|          | 55/5179 [23:00<23:00:25]Processing: The Beths                          : :   1%|          | 55/5179 [23:03<23:00:25]Processing: The Beths                          : :   1%|          | 56/5179 [23:16<23:01:07]Processing: Stars of the Lid                   : :   1%|          | 56/5179 [23:20<23:01:07]Processing: Stars of the Lid                   : :   1%|          | 57/5179 [23:31<22:20:21]Processing: Sabrina Carpenter                  : :   1%|          | 57/5179 [23:34<22:20:21]Processing: Sabrina Carpenter                  : :   1%|          | 58/5179 [24:19<36:08:49]Processing: Margo Price                        : :   1%|          | 58/5179 [24:21<36:08:49]Processing: Margo Price                        : :   1%|          | 59/5179 [25:00<42:55:05]Processing: Ganser                             : :   1%|          | 59/5179 [25:03<42:55:05]Processing: Ganser                             : :   1%|          | 60/5179 [25:26<40:58:08]                                                                                            Processing: Ganser                             : :   1%|          | 60/5179 [25:26<40:58:08]Processing: Anna Tivel                         : :   1%|          | 60/5179 [25:30<40:58:08]Processing: Anna Tivel                         : :   1%|          | 61/5179 [25:55<40:56:47]Processing: Zach Top                           : :   1%|          | 61/5179 [25:58<40:56:47]Processing: Zach Top                           : :   1%|          | 62/5179 [26:23<40:49:40]Processing: Lathe of Heaven                    : :   1%|          | 62/5179 [26:26<40:49:40]Processing: Lathe of Heaven                    : :   1%|          | 63/5179 [26:32<32:27:02]Processing: The Tragically Hip                 : :   1%|          | 63/5179 [26:35<32:27:02]Processing: The Tragically Hip                 : :   1%|          | 64/5179 [27:04<36:26:39]Processing: Haruomi Hosono                     : :   1%|          | 64/5179 [27:08<36:26:39]Processing: Haruomi Hosono                     : :   1%|▏         | 65/5179 [27:54<46:41:48]Processing: Terre Thaemlitz                    : :   1%|▏         | 65/5179 [27:57<46:41:48]Processing: Terre Thaemlitz                    : :   1%|▏         | 66/5179 [27:58<34:13:55]Processing: CMAT                               : :   1%|▏         | 66/5179 [28:00<34:13:55]Processing: CMAT                               : :   1%|▏         | 67/5179 [28:23<34:31:39]Processing: Wolf Alice                         : :   1%|▏         | 67/5179 [28:26<34:31:39]Processing: Wolf Alice                         : :   1%|▏         | 68/5179 [28:48<34:56:44]Processing: Earl Sweatshirt                    : :   1%|▏         | 68/5179 [28:50<34:56:44]Processing: Earl Sweatshirt                    : :   1%|▏         | 69/5179 [29:07<32:29:02]Processing: Sir Chloe                          : :   1%|▏         | 69/5179 [29:11<32:29:02]Processing: Sir Chloe                          : :   1%|▏         | 70/5179 [29:31<32:56:04]Processing: Hunx and His Punx                  : :   1%|▏         | 70/5179 [29:35<32:56:04]Processing: Hunx and His Punx                  : :   1%|▏         | 71/5179 [29:42<28:02:18]Processing: Nourished by Time                  : :   1%|▏         | 71/5179 [29:46<28:02:18]Processing: Nourished by Time                  : :   1%|▏         | 72/5179 [30:11<31:57:40]Processing: Alison Goldfrapp                   : :   1%|▏         | 72/5179 [30:15<31:57:40]Processing: Alison Goldfrapp                   : :   1%|▏         | 73/5179 [30:38<33:37:37]Processing: Kathleen Edwards                   : :   1%|▏         | 73/5179 [30:41<33:37:37]Processing: Kathleen Edwards                   : :   1%|▏         | 74/5179 [30:57<31:31:58]Processing: Water From Your Eyes               : :   1%|▏         | 74/5179 [31:00<31:31:58]Processing: Water From Your Eyes               : :   1%|▏         | 75/5179 [31:32<37:00:30]Processing: Kaitlyn Aurelia Smith              : :   1%|▏         | 75/5179 [31:35<37:00:30]Processing: Kaitlyn Aurelia Smith              : :   1%|▏         | 76/5179 [32:18<45:31:24]Processing: Scree                              : :   1%|▏         | 76/5179 [32:21<45:31:24]Processing: Scree                              : :   1%|▏         | 77/5179 [32:46<43:51:38]Processing: Mac DeMarco                        : :   1%|▏         | 77/5179 [32:49<43:51:38]Processing: Mac DeMarco                        : :   2%|▏         | 78/5179 [33:23<46:20:05]Processing: Superchunk                         : :   2%|▏         | 78/5179 [33:26<46:20:05]Processing: Superchunk                         : :   2%|▏         | 79/5179 [34:12<53:09:25]Processing: Charley Crockett                   : :   2%|▏         | 79/5179 [34:16<53:09:25]Processing: Charley Crockett                   : :   2%|▏         | 80/5179 [35:00<57:31:57]                                                                                            Processing: Charley Crockett                   : :   2%|▏         | 80/5179 [35:00<57:31:57]Processing: Pavement                           : :   2%|▏         | 80/5179 [35:03<57:31:57]Processing: Pavement                           : :   2%|▏         | 81/5179 [35:23<50:08:28]Processing: Susumu Yokota                      : :   2%|▏         | 81/5179 [35:26<50:08:28]Processing: Susumu Yokota                      : :   2%|▏         | 82/5179 [36:02<51:47:37]Processing: Hand Habits                        : :   2%|▏         | 82/5179 [36:04<51:47:37]Processing: Hand Habits                        : :   2%|▏         | 83/5179 [36:30<47:55:39]Processing: The World Is a Beautiful Place & I : :   2%|▏         | 83/5179 [36:32<47:55:39]Processing: The World Is a Beautiful Place & I : :   2%|▏         | 84/5179 [36:51<42:40:45]Processing: Pino Palladino                     : :   2%|▏         | 84/5179 [36:55<42:40:45]Processing: Pino Palladino                     : :   2%|▏         | 85/5179 [37:04<35:14:21]Processing: Deftones                           : :   2%|▏         | 85/5179 [37:08<35:14:21]Processing: Deftones                           : :   2%|▏         | 86/5179 [44:22<210:24:10]Processing: Laufey                             : :   2%|▏         | 86/5179 [44:25<210:24:10]Processing: Laufey                             : :   2%|▏         | 87/5179 [51:26<327:11:07]Processing: Audrey Hobert                      : :   2%|▏         | 87/5179 [51:29<327:11:07]Processing: Audrey Hobert                      : :   2%|▏         | 88/5179 [58:30<408:56:39]Processing: Chance the Rapper                  : :   2%|▏         | 88/5179 [58:32<408:56:39]Processing: Chance the Rapper                  : :   2%|▏         | 89/5179 [1:05:33<465:34:49]Processing: Maroon 5                           : :   2%|▏         | 89/5179 [1:05:36<465:34:49]Processing: Maroon 5                           : :   2%|▏         | 90/5179 [1:12:36<505:33:21]Processing: Mark Ernestus’ Ndagga Rhythm Force : :   2%|▏         | 90/5179 [1:12:39<505:33:21]Processing: Mark Ernestus’ Ndagga Rhythm Force : :   2%|▏         | 91/5179 [1:19:40<533:13:30]Processing: Kaytranada                         : :   2%|▏         | 91/5179 [1:19:42<533:13:30]Processing: Kaytranada                         : :   2%|▏         | 92/5179 [1:26:42<552:18:42]Processing: Steve Gunn                         : :   2%|▏         | 92/5179 [1:26:45<552:18:42]Processing: Steve Gunn                         : :   2%|▏         | 93/5179 [1:46:45<896:30:45]Processing: Racing Mount Pleasant              : :   2%|▏         | 93/5179 [1:46:48<896:30:45]Processing: Racing Mount Pleasant              : :   2%|▏         | 94/5179 [1:53:49<806:52:50]Processing: Dijon                              : :   2%|▏         | 94/5179 [1:53:53<806:52:50]Processing: Dijon                              : :   2%|▏         | 95/5179 [2:00:53<744:26:40]Processing: Pool Kids                          : :   2%|▏         | 95/5179 [2:00:56<744:26:40]Processing: Pool Kids                          : :   2%|▏         | 96/5179 [2:07:56<700:11:57]Processing: Rio Da Yung OG                     : :   2%|▏         | 96/5179 [2:07:59<700:11:57]Processing: Rio Da Yung OG                     : :   2%|▏         | 97/5179 [2:14:59<669:21:26]Processing: Various Artists                    : :   2%|▏         | 97/5179 [2:15:03<669:21:26]Processing: Various Artists                    : :   2%|▏         | 98/5179 [2:22:13<652:11:29]Processing: Cass McCombs                       : :   2%|▏         | 98/5179 [2:22:16<652:11:29]Processing: Cass McCombs                       : :   2%|▏         | 99/5179 [2:29:17<635:38:36]Processing: Radiohead                          : :   2%|▏         | 99/5179 [2:29:20<635:38:36]Processing: Radiohead                          : :   2%|▏         | 100/5179 [2:36:20<624:10:10]                                                                                                Processing: Radiohead                          : :   2%|▏         | 100/5179 [2:36:20<624:10:10]Processing: Pile                               : :   2%|▏         | 100/5179 [2:36:23<624:10:10]Processing: Pile                               : :   2%|▏         | 101/5179 [2:43:23<615:38:48]Processing: Mondo Lava                         : :   2%|▏         | 101/5179 [2:43:26<615:38:48]Processing: Mondo Lava                         : :   2%|▏         | 102/5179 [2:50:26<610:01:34]Processing: MGK                                : :   2%|▏         | 102/5179 [2:50:29<610:01:34]Processing: MGK                                : :   2%|▏         | 103/5179 [3:10:56<946:52:42]Processing: Phil Elverum                       : :   2%|▏         | 103/5179 [3:10:59<946:52:42]Processing: Phil Elverum                       : :   2%|▏         | 104/5179 [3:18:05<844:26:00]Processing: wolfacejoeyy                       : :   2%|▏         | 104/5179 [3:18:08<844:26:00]Processing: wolfacejoeyy                       : :   2%|▏         | 105/5179 [4:26:15<2320:12:22]Processing: Quadeca                            : :   2%|▏         | 105/5179 [4:26:24<2320:12:22]Processing: Quadeca                            : :   2%|▏         | 106/5179 [4:33:37<1810:43:03]Processing: coatshek                           : :   2%|▏         | 106/5179 [4:33:41<1810:43:03]Processing: coatshek                           : :   2%|▏         | 107/5179 [4:58:59<1910:32:37]Processing: Field Medic                        : :   2%|▏         | 107/5179 [4:59:01<1910:32:37]Processing: Field Medic                        : :   2%|▏         | 108/5179 [5:14:57<1741:56:18]Processing: Osees                              : :   2%|▏         | 108/5179 [5:14:59<1741:56:18]Processing: Osees                              : :   2%|▏         | 109/5179 [5:22:12<1402:45:34]Processing: Anamanaguchi                       : :   2%|▏         | 109/5179 [5:22:15<1402:45:34]Processing: Anamanaguchi                       : :   2%|▏         | 110/5179 [5:29:19<1162:23:28]Processing: Recoechi                           : :   2%|▏         | 110/5179 [5:29:27<1162:23:28]Processing: Recoechi                           : :   2%|▏         | 111/5179 [5:36:46<1002:14:18]Processing: No Joy                             : :   2%|▏         | 111/5179 [5:36:49<1002:14:18]Processing: No Joy                             : :   2%|▏         | 112/5179 [5:43:55<882:31:06] Processing: Big Freedia                        : :   2%|▏         | 112/5179 [5:43:58<882:31:06]Processing: Big Freedia                        : :   2%|▏         | 113/5179 [5:51:17<804:20:42]Processing: Vylet Pony                         : :   2%|▏         | 113/5179 [5:51:21<804:20:42]Processing: Vylet Pony                         : :   2%|▏         | 114/5179 [5:58:31<746:02:14]Processing: Toni Braxton                       : :   2%|▏         | 114/5179 [5:58:34<746:02:14]Processing: Toni Braxton                       : :   2%|▏         | 115/5179 [6:05:34<700:37:22]Processing: Nick Drake                         : :   2%|▏         | 115/5179 [6:05:44<700:37:22]Processing: Nick Drake                         : :   2%|▏         | 116/5179 [6:12:58<677:41:27]Processing: Amaarae                            : :   2%|▏         | 116/5179 [6:13:01<677:41:27]Processing: Amaarae                            : :   2%|▏         | 117/5179 [6:20:21<660:59:18]Processing: Ada Lea                            : :   2%|▏         | 117/5179 [6:20:24<660:59:18]Processing: Ada Lea                            : :   2%|▏         | 118/5179 [6:27:30<643:40:30]Processing: Mal Blum                           : :   2%|▏         | 118/5179 [6:27:33<643:40:30]Processing: Mal Blum                           : :   2%|▏         | 119/5179 [6:34:33<628:52:21]Processing: Ethel Cain                         : :   2%|▏         | 119/5179 [6:34:37<628:52:21]Processing: Ethel Cain                         : :   2%|▏         | 120/5179 [6:41:53<625:38:16]                                                                                                Processing: Ethel Cain                         : :   2%|▏         | 120/5179 [6:41:53<625:38:16]Processing: The Black Keys                     : :   2%|▏         | 120/5179 [6:42:04<625:38:16]Processing: The Black Keys                     : :   2%|▏         | 121/5179 [6:49:20<626:18:53]Processing: Ali Sethi                          : :   2%|▏         | 121/5179 [6:49:23<626:18:53]Processing: Ali Sethi                          : :   2%|▏         | 122/5179 [6:56:23<616:29:33]Processing: Metro Boomin                       : :   2%|▏         | 122/5179 [6:56:25<616:29:33]Processing: Metro Boomin                       : :   2%|▏         | 123/5179 [7:03:33<612:43:54]Processing: DJ K                               : :   2%|▏         | 123/5179 [7:03:36<612:43:54]Processing: DJ K                               : :   2%|▏         | 124/5179 [7:10:36<607:03:12]Processing: Xaviersobased                      : :   2%|▏         | 124/5179 [7:10:39<607:03:12]Processing: Xaviersobased                      : :   2%|▏         | 125/5179 [7:17:46<605:43:30]Processing: Heatmiser                          : :   2%|▏         | 125/5179 [7:17:48<605:43:30]Processing: Heatmiser                          : :   2%|▏         | 126/5179 [7:24:49<602:19:14]Processing: AraabMuzik                         : :   2%|▏         | 126/5179 [7:24:53<602:19:14]Processing: AraabMuzik                         : :   2%|▏         | 127/5179 [7:31:53<599:52:56]Processing: 2pillz                             : :   2%|▏         | 127/5179 [7:31:56<599:52:56]Processing: 2pillz                             : :   2%|▏         | 128/5179 [7:39:06<602:04:30]Processing: The Armed                          : :   2%|▏         | 128/5179 [7:39:09<602:04:30]Processing: The Armed                          : :   2%|▏         | 129/5179 [7:46:10<599:36:10]Processing: Rounak Maiti                       : :   2%|▏         | 129/5179 [7:46:12<599:36:10]Processing: Rounak Maiti                       : :   3%|▎         | 130/5179 [7:53:23<602:05:43]Processing: Tommy Genesis                      : :   3%|▎         | 130/5179 [7:53:27<602:05:43]Processing: Tommy Genesis                      : :   3%|▎         | 131/5179 [8:00:27<599:46:14]Processing: Shudder to Think                   : :   3%|▎         | 131/5179 [8:00:30<599:46:14]Processing: Shudder to Think                   : :   3%|▎         | 132/5179 [8:07:36<600:03:57]Processing: Reneé Rapp                         : :   3%|▎         | 132/5179 [8:07:40<600:03:57]Processing: Reneé Rapp                         : :   3%|▎         | 133/5179 [8:14:40<598:14:50]Processing: Wisp                               : :   3%|▎         | 133/5179 [8:14:44<598:14:50]Processing: Wisp                               : :   3%|▎         | 134/5179 [8:21:44<596:54:34]Processing: Sofia Kourtesis                    : :   3%|▎         | 134/5179 [8:21:47<596:54:34]Processing: Sofia Kourtesis                    : :   3%|▎         | 135/5179 [8:28:47<595:40:52]Processing: zayALLCAPS                         : :   3%|▎         | 135/5179 [8:28:51<595:40:52]Processing: zayALLCAPS                         : :   3%|▎         | 136/5179 [8:35:51<595:10:34]Processing: Freddie Gibbs                      : :   3%|▎         | 136/5179 [8:35:54<595:10:34]Processing: Freddie Gibbs                      : :   3%|▎         | 137/5179 [8:42:59<596:11:16]Processing: YoungBoy Never Broke Again         : :   3%|▎         | 137/5179 [8:43:03<596:11:16]Processing: YoungBoy Never Broke Again         : :   3%|▎         | 138/5179 [8:50:03<595:29:51]Processing: Lelo                               : :   3%|▎         | 138/5179 [8:50:07<595:29:51]Processing: Lelo                               : :   3%|▎         | 139/5179 [8:57:30<604:24:03]Processing: Madonna                            : :   3%|▎         | 139/5179 [8:57:33<604:24:03]Processing: Madonna                            : :   3%|▎         | 140/5179 [9:04:45<605:26:59]                                                                                                Processing: Madonna                            : :   3%|▎         | 140/5179 [9:04:45<605:26:59]Processing: Kurt Vile                          : :   3%|▎         | 140/5179 [9:04:48<605:26:59]Processing: Kurt Vile                          : :   3%|▎         | 141/5179 [9:11:48<601:34:34]Processing: Homeboy Sandman                    : :   3%|▎         | 141/5179 [9:11:51<601:34:34]Processing: Homeboy Sandman                    : :   3%|▎         | 142/5179 [9:19:05<604:25:18]Processing: Chuquimamani-Condori               : :   3%|▎         | 142/5179 [9:19:08<604:25:18]Processing: Chuquimamani-Condori               : :   3%|▎         | 143/5179 [9:26:08<600:37:04]Processing: Loe Shimmy                         : :   3%|▎         | 143/5179 [9:26:11<600:37:04]Processing: Loe Shimmy                         : :   3%|▎         | 144/5179 [9:33:16<599:50:14]Processing: Cory Hanson                        : :   3%|▎         | 144/5179 [9:33:18<599:50:14]Processing: Cory Hanson                        : :   3%|▎         | 145/5179 [9:40:18<597:00:28]Processing: Indigo De Souza                    : :   3%|▎         | 145/5179 [9:40:21<597:00:28]Processing: Indigo De Souza                    : :   3%|▎         | 146/5179 [9:47:26<597:06:43]Processing: rRoxymore                          : :   3%|▎         | 146/5179 [9:47:29<597:06:43]Processing: rRoxymore                          : :   3%|▎         | 147/5179 [9:54:29<595:22:42]Processing: Far Caspian                        : :   3%|▎         | 147/5179 [9:54:31<595:22:42]Processing: Far Caspian                        : :   3%|▎         | 148/5179 [10:01:32<593:48:38]Processing: Deee-Lite                          : :   3%|▎         | 148/5179 [10:01:35<593:48:38]Processing: Deee-Lite                          : :   3%|▎         | 149/5179 [10:08:41<595:36:56]Processing: Tyler Childers                     : :   3%|▎         | 149/5179 [10:08:44<595:36:56]Processing: Tyler Childers                     : :   3%|▎         | 150/5179 [10:16:03<601:52:57]Processing: Ryan Davis & the Roadhouse Band    : :   3%|▎         | 150/5179 [10:16:12<601:52:57]Processing: Ryan Davis & the Roadhouse Band    : :   3%|▎         | 151/5179 [10:23:19<603:53:10]Processing: Cleo Reed                          : :   3%|▎         | 151/5179 [10:23:22<603:53:10]Processing: Cleo Reed                          : :   3%|▎         | 152/5179 [10:30:23<600:17:02]Processing: forty winks                        : :   3%|▎         | 152/5179 [10:30:26<600:17:02]Processing: forty winks                        : :   3%|▎         | 153/5179 [10:37:33<600:25:22]Processing: Tyler, the Creator                 : :   3%|▎         | 153/5179 [10:37:36<600:25:22]Processing: Tyler, the Creator                 : :   3%|▎         | 154/5179 [10:44:41<599:23:37]Processing: Raekwon                            : :   3%|▎         | 154/5179 [10:44:45<599:23:37]Processing: Raekwon                            : :   3%|▎         | 155/5179 [10:51:57<602:01:10]Processing: Anycia                             : :   3%|▎         | 155/5179 [10:51:59<602:01:10]Processing: Anycia                             : :   3%|▎         | 156/5179 [10:59:00<598:31:16]Processing: Che                                : :   3%|▎         | 156/5179 [10:59:03<598:31:16]Processing: Che                                : :   3%|▎         | 157/5179 [11:06:21<603:21:58]Processing: Laura Jane Grace                   : :   3%|▎         | 157/5179 [11:06:24<603:21:58]Processing: Laura Jane Grace                   : :   3%|▎         | 158/5179 [11:13:24<599:14:43]Processing: Alex Warren                        : :   3%|▎         | 158/5179 [11:13:27<599:14:43]Processing: Alex Warren                        : :   3%|▎         | 159/5179 [11:20:27<596:15:17]Processing: Two Shell                          : :   3%|▎         | 159/5179 [11:20:29<596:15:17]Processing: Two Shell                          : :   3%|▎         | 160/5179 [11:27:34<595:49:40]                                                                                                 Processing: Two Shell                          : :   3%|▎         | 160/5179 [11:27:34<595:49:40]Processing: Sofie Birch                        : :   3%|▎         | 160/5179 [11:27:37<595:49:40]Processing: Sofie Birch                        : :   3%|▎         | 161/5179 [11:34:49<599:06:58]Processing: Jonathan Richman                   : :   3%|▎         | 161/5179 [11:34:52<599:06:58]Processing: Jonathan Richman                   : :   3%|▎         | 162/5179 [11:42:05<601:37:17]Processing: JACKBOYS                           : :   3%|▎         | 162/5179 [11:42:09<601:37:17]Processing: JACKBOYS                           : :   3%|▎         | 163/5179 [11:49:21<603:19:50]Processing: Disiniblud                         : :   3%|▎         | 163/5179 [11:49:24<603:19:50]Processing: Disiniblud                         : :   3%|▎         | 164/5179 [11:56:36<603:53:48]Processing: Le Diouck                          : :   3%|▎         | 164/5179 [11:56:39<603:53:48]Processing: Le Diouck                          : :   3%|▎         | 165/5179 [12:03:43<601:08:40]Processing: Connie Converse                    : :   3%|▎         | 165/5179 [12:03:47<601:08:40]Processing: Connie Converse                    : :   3%|▎         | 166/5179 [12:10:48<598:05:10]Processing: Sly and the Family Stone           : :   3%|▎         | 166/5179 [12:10:52<598:05:10]Processing: Sly and the Family Stone           : :   3%|▎         | 167/5179 [12:17:56<597:28:40]Processing: Jim Legxacy                        : :   3%|▎         | 167/5179 [12:17:59<597:28:40]Processing: Jim Legxacy                        : :   3%|▎         | 168/5179 [12:25:18<602:29:51]Processing: Burna Boy                          : :   3%|▎         | 168/5179 [12:25:21<602:29:51]Processing: Burna Boy                          : :   3%|▎         | 169/5179 [12:32:27<601:01:17]Processing: $ilkMoney                          : :   3%|▎         | 169/5179 [12:32:30<601:01:17]Processing: $ilkMoney                          : :   3%|▎         | 170/5179 [12:39:32<597:42:41]Processing: Alex G                             : :   3%|▎         | 170/5179 [12:39:41<597:42:41]Processing: Alex G                             : :   3%|▎         | 171/5179 [12:46:53<602:41:05]Processing: Takako Minekawa                    : :   3%|▎         | 171/5179 [12:46:56<602:41:05]Processing: Takako Minekawa                    : :   3%|▎         | 172/5179 [12:54:08<603:21:13]Processing: DEMIYAA                            : :   3%|▎         | 172/5179 [12:54:12<603:21:13]Processing: DEMIYAA                            : :   3%|▎         | 173/5179 [13:01:12<599:06:29]Processing: gyrofield                          : :   3%|▎         | 173/5179 [13:01:16<599:06:29]Processing: gyrofield                          : :   3%|▎         | 174/5179 [13:08:22<598:38:50]Processing: Brutus VIII                        : :   3%|▎         | 174/5179 [13:08:25<598:38:50]Processing: Brutus VIII                        : :   3%|▎         | 175/5179 [13:15:32<598:00:58]Processing: Open Mike Eagle                    : :   3%|▎         | 175/5179 [13:15:35<598:00:58]Processing: Open Mike Eagle                    : :   3%|▎         | 176/5179 [13:22:41<597:30:45]Processing: DJ Haram                           : :   3%|▎         | 176/5179 [13:22:44<597:30:45]Processing: DJ Haram                           : :   3%|▎         | 177/5179 [13:29:50<597:01:43]Processing: Jonny Nash                         : :   3%|▎         | 177/5179 [13:29:53<597:01:43]Processing: Jonny Nash                         : :   3%|▎         | 178/5179 [13:37:14<602:45:44]Processing: Wet Leg                            : :   3%|▎         | 178/5179 [13:37:16<602:45:44]Processing: Wet Leg                            : :   3%|▎         | 179/5179 [13:44:21<599:57:57]Processing: Tony Njoku                         : :   3%|▎         | 179/5179 [13:44:25<599:57:57]Processing: Tony Njoku                         : :   3%|▎         | 180/5179 [13:51:38<601:45:34]                                                                                                 Processing: Tony Njoku                         : :   3%|▎         | 180/5179 [13:51:38<601:45:34]Processing: STOMACH BOOK                       : :   3%|▎         | 180/5179 [13:51:42<601:45:34]Processing: STOMACH BOOK                       : :   3%|▎         | 181/5179 [13:58:48<600:24:41]Processing: Tori Amos                          : :   3%|▎         | 181/5179 [13:58:52<600:24:41]Processing: Tori Amos                          : :   4%|▎         | 182/5179 [14:06:10<604:14:17]Processing: Wavves                             : :   4%|▎         | 182/5179 [14:06:14<604:14:17]Processing: Wavves                             : :   4%|▎         | 183/5179 [14:13:20<601:46:43]Processing: Clipse                             : :   4%|▎         | 183/5179 [14:13:23<601:46:43]Processing: Clipse                             : :   4%|▎         | 184/5179 [14:20:24<597:34:11]Processing: d.silvestre                        : :   4%|▎         | 184/5179 [14:20:28<597:34:11]Processing: d.silvestre                        : :   4%|▎         | 185/5179 [14:27:40<599:43:12]Processing: MikeBrokeasf                       : :   4%|▎         | 185/5179 [14:27:43<599:43:12]Processing: MikeBrokeasf                       : :   4%|▎         | 186/5179 [14:34:56<600:59:10]Processing: Double Virgo                       : :   4%|▎         | 186/5179 [14:34:59<600:59:10]Processing: Double Virgo                       : :   4%|▎         | 187/5179 [14:42:00<596:58:37]Processing: Jeremiah Chiu                      : :   4%|▎         | 187/5179 [14:42:03<596:58:37]Processing: Jeremiah Chiu                      : :   4%|▎         | 188/5179 [14:49:21<601:25:19]Processing: Boundary                           : :   4%|▎         | 188/5179 [14:49:24<601:25:19]Processing: Boundary                           : :   4%|▎         | 189/5179 [14:56:24<596:59:43]Processing: Smut                               : :   4%|▎         | 189/5179 [14:56:27<596:59:43]Processing: Smut                               : :   4%|▎         | 190/5179 [15:03:46<601:18:14]Processing: Kesha                              : :   4%|▎         | 190/5179 [15:03:49<601:18:14]Processing: Kesha                              : :   4%|▎         | 191/5179 [15:10:50<597:15:40]Processing: Pan American                       : :   4%|▎         | 191/5179 [15:10:53<597:15:40]Processing: Pan American                       : :   4%|▎         | 192/5179 [15:18:12<601:30:21]Processing: LAZER DIM 700                      : :   4%|▎         | 192/5179 [15:18:14<601:30:21]Processing: LAZER DIM 700                      : :   4%|▎         | 193/5179 [15:25:15<596:38:22]Processing: Ben LaMar Gay                      : :   4%|▎         | 193/5179 [15:25:17<596:38:22]Processing: Ben LaMar Gay                      : :   4%|▎         | 194/5179 [15:32:28<597:46:48]Processing: Media Puzzle                       : :   4%|▎         | 194/5179 [15:32:31<597:46:48]Processing: Media Puzzle                       : :   4%|▍         | 195/5179 [15:39:43<598:51:10]Processing: Maxo                               : :   4%|▍         | 195/5179 [15:39:45<598:51:10]Processing: Maxo                               : :   4%|▍         | 196/5179 [15:46:46<594:37:26]Processing: Juan Wauters                       : :   4%|▍         | 196/5179 [15:46:48<594:37:26]Processing: Juan Wauters                       : :   4%|▍         | 197/5179 [15:54:01<596:42:28]💾 Progress saved: 20 artists processed (Success: 20, Failed: 0)
+💾 Progress saved: 40 artists processed (Success: 40, Failed: 0)
+💾 Progress saved: 60 artists processed (Success: 60, Failed: 0)
+Error fetching data for artist 4FGPzWzgjURDNT7JQ8pYgH: HTTPSConnectionPool(host='api.spotify.com', port=443): Read timed out. (read timeout=10)
+
+= Refreshing access token...
+ Token refreshed
+💾 Progress saved: 80 artists processed (Success: 79, Failed: 1)
+
+⚠️  Rate limited! Waiting 60s before retry 1/3...
+
+⚠️  Rate limited! Waiting 120s before retry 2/3...
+
+⚠️  Rate limited! Waiting 240s before retry 3/3...
+Failed after 3 retries for artist 6Ghvu1VvMGScGpOUJBAHNH
+
+⚠️  Rate limited! Waiting 60s before retry 1/3...
+
+⚠️  Rate limited! Waiting 120s before retry 2/3...
+
+⚠️  Rate limited! Waiting 240s before retry 3/3...
+Failed after 3 retries for artist 7gW0r5CkdEUMm42w9XpyZO
+
+⚠️  Rate limited! Waiting 60s before retry 1/3...
+
+⚠️  Rate limited! Waiting 120s before retry 2/3...
+
+⚠️  Rate limited! Waiting 240s before retry 3/3...
+Failed after 3 retries for artist 4N0TAwz9vhnQtjCqS65aKS
+
+⚠️  Rate limited! Waiting 60s before retry 1/3...
+
+⚠️  Rate limited! Waiting 120s before retry 2/3...
+
+⚠️  Rate limited! Waiting 240s before retry 3/3...
+Failed after 3 retries for artist 1anyVhU62p31KFi8MEzkbf
+
+= Refreshing access token...
+ Token refreshed
+
+⚠️  Rate limited! Waiting 60s before retry 1/3...
+
+⚠️  Rate limited! Waiting 120s before retry 2/3...
+
+⚠️  Rate limited! Waiting 240s before retry 3/3...
+Failed after 3 retries for artist 04gDigrS5kc9YWfZHwBETP
+
+⚠️  Rate limited! Waiting 60s before retry 1/3...
+
+⚠️  Rate limited! Waiting 120s before retry 2/3...
+
+⚠️  Rate limited! Waiting 240s before retry 3/3...
+Failed after 3 retries for artist 519lIb4ZQM267yqJrVFhhY
+
+⚠️  Rate limited! Waiting 60s before retry 1/3...
+
+⚠️  Rate limited! Waiting 120s before retry 2/3...
+
+⚠️  Rate limited! Waiting 240s before retry 3/3...
+Failed after 3 retries for artist 6qgnBH6iDM91ipVXv28OMu
+
+⚠️  Rate limited! Waiting 60s before retry 1/3...
+
+⚠️  Rate limited! Waiting 120s before retry 2/3...
+
+⚠️  Rate limited! Waiting 240s before retry 3/3...
+Failed after 3 retries for artist 7uLXW75DlTRahz2WKJZGeO
+
+= Refreshing access token...
+ Token refreshed
+
+⚠️  Rate limited! Waiting 60s before retry 1/3...
+
+⚠️  Rate limited! Waiting 120s before retry 2/3...
+
+⚠️  Rate limited! Waiting 240s before retry 3/3...
+Failed after 3 retries for artist 5zaSiNpGxS2lOvZTIZiOQX
+
+⚠️  Rate limited! Waiting 60s before retry 1/3...
+
+⚠️  Rate limited! Waiting 120s before retry 2/3...
+
+⚠️  Rate limited! Waiting 240s before retry 3/3...
+Failed after 3 retries for artist 0knGpCTbmG4ctl1wzYRZs4
+
+⚠️  Rate limited! Waiting 60s before retry 1/3...
+
+⚠️  Rate limited! Waiting 120s before retry 2/3...
+
+⚠️  Rate limited! Waiting 240s before retry 3/3...
+Failed after 3 retries for artist 6yoW6SfviQ5D4Wa5jGxh7f
+
+⚠️  Rate limited! Waiting 60s before retry 1/3...
+
+⚠️  Rate limited! Waiting 120s before retry 2/3...
+
+⚠️  Rate limited! Waiting 240s before retry 3/3...
+Failed after 3 retries for artist 6O1vRHWVGKJTnWuJmItnsx
+
+⚠️  Rate limited! Waiting 60s before retry 1/3...
+
+⚠️  Rate limited! Waiting 120s before retry 2/3...
+
+⚠️  Rate limited! Waiting 240s before retry 3/3...
+Failed after 3 retries for artist 5JIVodFcCSJg9EEBsMQyYd
+
+= Refreshing access token...
+ Token refreshed
+
+⚠️  Rate limited! Waiting 60s before retry 1/3...
+
+⚠️  Rate limited! Waiting 120s before retry 2/3...
+
+⚠️  Rate limited! Waiting 240s before retry 3/3...
+Failed after 3 retries for artist 2iUVQjheBnvOt8vaBrxXJz
+
+⚠️  Rate limited! Waiting 60s before retry 1/3...
+
+⚠️  Rate limited! Waiting 120s before retry 2/3...
+
+⚠️  Rate limited! Waiting 240s before retry 3/3...
+Failed after 3 retries for artist 4Z8W4fKeB5YxbusRsdQVPb
+💾 Progress saved: 100 artists processed (Success: 84, Failed: 16)
+
+⚠️  Rate limited! Waiting 60s before retry 1/3...
+
+⚠️  Rate limited! Waiting 120s before retry 2/3...
+
+⚠️  Rate limited! Waiting 240s before retry 3/3...
+Failed after 3 retries for artist 44pUNjqg4mExLyFHnB3Bqf
+
+⚠️  Rate limited! Waiting 60s before retry 1/3...
+
+⚠️  Rate limited! Waiting 120s before retry 2/3...
+
+⚠️  Rate limited! Waiting 240s before retry 3/3...
+Failed after 3 retries for artist 29FujBxc4P5mvmNas09T0F
+
+⚠️  Rate limited! Waiting 60s before retry 1/3...
+
+⚠️  Rate limited! Waiting 120s before retry 2/3...
+
+⚠️  Rate limited! Waiting 240s before retry 3/3...
+Failed after 3 retries for artist 6TIYQ3jFPwQSRmorSezPxX
+
+= Refreshing access token...
+ Token refreshed
+
+⚠️  Rate limited! Waiting 60s before retry 1/3...
+
+⚠️  Rate limited! Waiting 120s before retry 2/3...
+
+⚠️  Rate limited! Waiting 240s before retry 3/3...
+Failed after 3 retries for artist 7Ht57YadlBXcFJDK3plmhO
+
+⚠️  Rate limited! Waiting 60s before retry 1/3...
+
+⚠️  Rate limited! Waiting 120s before retry 2/3...
+
+⚠️  Rate limited! Waiting 240s before retry 3/3...
+Failed after 3 retries for artist 7LjXznzJeKuvjRbNcBWd6Z
+
+= Refreshing access token...
+ Token refreshed
+
+⚠️  Rate limited! Waiting 60s before retry 1/3...
+
+⚠️  Rate limited! Waiting 120s before retry 2/3...
+
+⚠️  Rate limited! Waiting 240s before retry 3/3...
+Failed after 3 retries for artist 3zz52ViyCBcplK0ftEVPSS
+
+⚠️  Rate limited! Waiting 60s before retry 1/3...
+
+⚠️  Rate limited! Waiting 120s before retry 2/3...
+
+⚠️  Rate limited! Waiting 240s before retry 3/3...
+Failed after 3 retries for artist 1vyLURMcHJloqO9yj6tT9k
+
+= Refreshing access token...
+ Token refreshed
+
+⚠️  Rate limited! Waiting 60s before retry 1/3...
+
+⚠️  Rate limited! Waiting 120s before retry 2/3...
+
+⚠️  Rate limited! Waiting 240s before retry 3/3...
+Failed after 3 retries for artist 4wMfqR1EZagrSlYndItxGQ
+
+⚠️  Rate limited! Waiting 60s before retry 1/3...
+
+⚠️  Rate limited! Waiting 120s before retry 2/3...
+
+⚠️  Rate limited! Waiting 240s before retry 3/3...
+Failed after 3 retries for artist 0Ynh5WKqwbdYqJUpVpfEGS
+
+⚠️  Rate limited! Waiting 60s before retry 1/3...
+
+⚠️  Rate limited! Waiting 120s before retry 2/3...
+
+⚠️  Rate limited! Waiting 240s before retry 3/3...
+Failed after 3 retries for artist 2UwJRAgSOi1zcLkvUNc8XL
+
+= Refreshing access token...
+ Token refreshed
+
+⚠️  Rate limited! Waiting 60s before retry 1/3...
+
+⚠️  Rate limited! Waiting 120s before retry 2/3...
+
+⚠️  Rate limited! Waiting 240s before retry 3/3...
+Failed after 3 retries for artist 16RxzjUYa7obi9QXP02WO1
+
+⚠️  Rate limited! Waiting 60s before retry 1/3...
+
+⚠️  Rate limited! Waiting 120s before retry 2/3...
+
+⚠️  Rate limited! Waiting 240s before retry 3/3...
+Failed after 3 retries for artist 5N7DAaXV1EVXS8h2wyYrx2
+
+⚠️  Rate limited! Waiting 60s before retry 1/3...
+
+⚠️  Rate limited! Waiting 120s before retry 2/3...
+
+⚠️  Rate limited! Waiting 240s before retry 3/3...
+Failed after 3 retries for artist 2gyv1akuIB9fQvXoGSPaJr
+
+⚠️  Rate limited! Waiting 60s before retry 1/3...
+
+⚠️  Rate limited! Waiting 120s before retry 2/3...
+
+⚠️  Rate limited! Waiting 240s before retry 3/3...
+Failed after 3 retries for artist 1kM5BZXs7FFN8Dj1WpgH2j
+
+⚠️  Rate limited! Waiting 60s before retry 1/3...
+
+⚠️  Rate limited! Waiting 120s before retry 2/3...
+
+⚠️  Rate limited! Waiting 240s before retry 3/3...
+Failed after 3 retries for artist 3X458ddYA2YcVWuVIGGOYe
+
+= Refreshing access token...
+ Token refreshed
+
+⚠️  Rate limited! Waiting 60s before retry 1/3...
+
+⚠️  Rate limited! Waiting 120s before retry 2/3...
+
+⚠️  Rate limited! Waiting 240s before retry 3/3...
+Failed after 3 retries for artist 5c3GLXai8YOMid29ZEuR9y
+
+⚠️  Rate limited! Waiting 60s before retry 1/3...
+
+⚠️  Rate limited! Waiting 120s before retry 2/3...
+
+⚠️  Rate limited! Waiting 240s before retry 3/3...
+Failed after 3 retries for artist 21UPYSRWFKwtqvSAnFnSvS
+
+⚠️  Rate limited! Waiting 60s before retry 1/3...
+
+⚠️  Rate limited! Waiting 120s before retry 2/3...
+
+⚠️  Rate limited! Waiting 240s before retry 3/3...
+Failed after 3 retries for artist 3sE8O47mEFWR6pL0rwnAHy
+
+⚠️  Rate limited! Waiting 60s before retry 1/3...
+
+⚠️  Rate limited! Waiting 120s before retry 2/3...
+
+⚠️  Rate limited! Waiting 240s before retry 3/3...
+Failed after 3 retries for artist 4tT8fWyOy0hVI7jo9fJmXX
+
+⚠️  Rate limited! Waiting 60s before retry 1/3...
+
+⚠️  Rate limited! Waiting 120s before retry 2/3...
+
+⚠️  Rate limited! Waiting 240s before retry 3/3...
+Failed after 3 retries for artist 0avMDS4HyoCEP6RqZJWpY2
+💾 Progress saved: 120 artists processed (Success: 84, Failed: 36)
+
+= Refreshing access token...
+ Token refreshed
+
+⚠️  Rate limited! Waiting 60s before retry 1/3...
+
+⚠️  Rate limited! Waiting 120s before retry 2/3...
+
+⚠️  Rate limited! Waiting 240s before retry 3/3...
+Failed after 3 retries for artist 7mnBLXK823vNxN3UWB7Gfz
+
+⚠️  Rate limited! Waiting 60s before retry 1/3...
+
+⚠️  Rate limited! Waiting 120s before retry 2/3...
+
+⚠️  Rate limited! Waiting 240s before retry 3/3...
+Failed after 3 retries for artist 3NegWDGp038A3FIi3gSYzl
+
+⚠️  Rate limited! Waiting 60s before retry 1/3...
+
+⚠️  Rate limited! Waiting 120s before retry 2/3...
+
+⚠️  Rate limited! Waiting 240s before retry 3/3...
+Failed after 3 retries for artist 0iEtIxbK0KxaSlF7G42ZOp
+
+⚠️  Rate limited! Waiting 60s before retry 1/3...
+
+⚠️  Rate limited! Waiting 120s before retry 2/3...
+
+⚠️  Rate limited! Waiting 240s before retry 3/3...
+Failed after 3 retries for artist 0QHgL1lAIqAw0HtD7YldmP
+
+⚠️  Rate limited! Waiting 60s before retry 1/3...
+
+⚠️  Rate limited! Waiting 120s before retry 2/3...
+
+⚠️  Rate limited! Waiting 240s before retry 3/3...
+Failed after 3 retries for artist 2oM7LMPFu882oC6jSwEqjd
+
+= Refreshing access token...
+ Token refreshed
+
+⚠️  Rate limited! Waiting 60s before retry 1/3...
+
+⚠️  Rate limited! Waiting 120s before retry 2/3...
+
+⚠️  Rate limited! Waiting 240s before retry 3/3...
+Failed after 3 retries for artist 59IPo3F7aZifhZtHnoGHbo
+
+⚠️  Rate limited! Waiting 60s before retry 1/3...
+
+⚠️  Rate limited! Waiting 120s before retry 2/3...
+
+⚠️  Rate limited! Waiting 240s before retry 3/3...
+Failed after 3 retries for artist 2iXdwLTWyFhlN1MQWIymvM
+
+⚠️  Rate limited! Waiting 60s before retry 1/3...
+
+⚠️  Rate limited! Waiting 120s before retry 2/3...
+
+⚠️  Rate limited! Waiting 240s before retry 3/3...
+Failed after 3 retries for artist 0XtC2d9ZVigYA7iMy5YkW0
+
+⚠️  Rate limited! Waiting 60s before retry 1/3...
+
+⚠️  Rate limited! Waiting 120s before retry 2/3...
+
+⚠️  Rate limited! Waiting 240s before retry 3/3...
+Failed after 3 retries for artist 4V5obzWMr7BHZrjOiQwB4K
+
+⚠️  Rate limited! Waiting 60s before retry 1/3...
+
+⚠️  Rate limited! Waiting 120s before retry 2/3...
+
+⚠️  Rate limited! Waiting 240s before retry 3/3...
+Failed after 3 retries for artist 5c4ikaZ8nPKn10NLZZCF0I
+
+= Refreshing access token...
+ Token refreshed
+
+⚠️  Rate limited! Waiting 60s before retry 1/3...
+
+⚠️  Rate limited! Waiting 120s before retry 2/3...
+
+⚠️  Rate limited! Waiting 240s before retry 3/3...
+Failed after 3 retries for artist 2qDdxfKUpYg8wc49KIuT3b
+
+⚠️  Rate limited! Waiting 60s before retry 1/3...
+
+⚠️  Rate limited! Waiting 120s before retry 2/3...
+
+⚠️  Rate limited! Waiting 240s before retry 3/3...
+Failed after 3 retries for artist 3PP5Hnii2zI9Ufm7jFkers
+
+⚠️  Rate limited! Waiting 60s before retry 1/3...
+
+⚠️  Rate limited! Waiting 120s before retry 2/3...
+
+⚠️  Rate limited! Waiting 240s before retry 3/3...
+Failed after 3 retries for artist 2hUYKu1x0UZQXvzCmggvSn
+
+⚠️  Rate limited! Waiting 60s before retry 1/3...
+
+⚠️  Rate limited! Waiting 120s before retry 2/3...
+
+⚠️  Rate limited! Waiting 240s before retry 3/3...
+Failed after 3 retries for artist 3TJZG17pjOKXwx1ELKJPfm
+
+⚠️  Rate limited! Waiting 60s before retry 1/3...
+
+⚠️  Rate limited! Waiting 120s before retry 2/3...
+
+⚠️  Rate limited! Waiting 240s before retry 3/3...
+Failed after 3 retries for artist 7wXTWO45lqpUejDkike0Gf
+
+= Refreshing access token...
+ Token refreshed
+
+⚠️  Rate limited! Waiting 60s before retry 1/3...
+
+⚠️  Rate limited! Waiting 120s before retry 2/3...
+
+⚠️  Rate limited! Waiting 240s before retry 3/3...
+Failed after 3 retries for artist 2i0QIuHqoui64KdE9xxAbL
+
+⚠️  Rate limited! Waiting 60s before retry 1/3...
+
+⚠️  Rate limited! Waiting 120s before retry 2/3...
+
+⚠️  Rate limited! Waiting 240s before retry 3/3...
+Failed after 3 retries for artist 0Y4inQK6OespitzD6ijMwb
+
+⚠️  Rate limited! Waiting 60s before retry 1/3...
+
+⚠️  Rate limited! Waiting 120s before retry 2/3...
+
+⚠️  Rate limited! Waiting 240s before retry 3/3...
+Failed after 3 retries for artist 7wlFDEWiM5OoIAt8RSli8b
+
+⚠️  Rate limited! Waiting 60s before retry 1/3...
+
+⚠️  Rate limited! Waiting 120s before retry 2/3...
+
+⚠️  Rate limited! Waiting 240s before retry 3/3...
+Failed after 3 retries for artist 6RcgNRwyY9YNTXd9luk8JW
+
+⚠️  Rate limited! Waiting 60s before retry 1/3...
+
+⚠️  Rate limited! Waiting 120s before retry 2/3...
+
+⚠️  Rate limited! Waiting 240s before retry 3/3...
+Failed after 3 retries for artist 6tbjWDEIzxoDsBA1FuhfPW
+💾 Progress saved: 140 artists processed (Success: 84, Failed: 56)
+
+= Refreshing access token...
+ Token refreshed
+
+⚠️  Rate limited! Waiting 60s before retry 1/3...
+
+⚠️  Rate limited! Waiting 120s before retry 2/3...
+
+⚠️  Rate limited! Waiting 240s before retry 3/3...
+Failed after 3 retries for artist 5gspAQIAH8nJUrMYgXjCJ2
+
+⚠️  Rate limited! Waiting 60s before retry 1/3...
+
+⚠️  Rate limited! Waiting 120s before retry 2/3...
+
+⚠️  Rate limited! Waiting 240s before retry 3/3...
+Failed after 3 retries for artist 5s1QeAf7U5ELP9PTeLaicb
+
+⚠️  Rate limited! Waiting 60s before retry 1/3...
+
+⚠️  Rate limited! Waiting 120s before retry 2/3...
+
+⚠️  Rate limited! Waiting 240s before retry 3/3...
+Failed after 3 retries for artist 4vV7A3OS088S8Ps2NtTcRO
+
+⚠️  Rate limited! Waiting 60s before retry 1/3...
+
+⚠️  Rate limited! Waiting 120s before retry 2/3...
+
+⚠️  Rate limited! Waiting 240s before retry 3/3...
+Failed after 3 retries for artist 6UIpxj5ggLdOebFVCOxVax
+
+⚠️  Rate limited! Waiting 60s before retry 1/3...
+
+⚠️  Rate limited! Waiting 120s before retry 2/3...
+
+⚠️  Rate limited! Waiting 240s before retry 3/3...
+Failed after 3 retries for artist 2XG4LWrmKXFA1PqnUsuPj6
+
+= Refreshing access token...
+ Token refreshed
+
+⚠️  Rate limited! Waiting 60s before retry 1/3...
+
+⚠️  Rate limited! Waiting 120s before retry 2/3...
+
+⚠️  Rate limited! Waiting 240s before retry 3/3...
+Failed after 3 retries for artist 3ir2pF2mkiEWqyPenKTh5e
+
+⚠️  Rate limited! Waiting 60s before retry 1/3...
+
+⚠️  Rate limited! Waiting 120s before retry 2/3...
+
+⚠️  Rate limited! Waiting 240s before retry 3/3...
+Failed after 3 retries for artist 559oW3wcVAW5tcL1DQniyf
+
+⚠️  Rate limited! Waiting 60s before retry 1/3...
+
+⚠️  Rate limited! Waiting 120s before retry 2/3...
+
+⚠️  Rate limited! Waiting 240s before retry 3/3...
+Failed after 3 retries for artist 0EzsHuJxUDcfqSqvoPhKG4
+
+⚠️  Rate limited! Waiting 60s before retry 1/3...
+
+⚠️  Rate limited! Waiting 120s before retry 2/3...
+
+⚠️  Rate limited! Waiting 240s before retry 3/3...
+Failed after 3 retries for artist 4eQJIXFEujzhTVVS1gIfu5
+
+⚠️  Rate limited! Waiting 60s before retry 1/3...
+
+⚠️  Rate limited! Waiting 120s before retry 2/3...
+
+⚠️  Rate limited! Waiting 240s before retry 3/3...
+Failed after 3 retries for artist 13ZEDW6vyBF12HYcZRr4EV
+
+= Refreshing access token...
+ Token refreshed
+
+⚠️  Rate limited! Waiting 60s before retry 1/3...
+
+⚠️  Rate limited! Waiting 120s before retry 2/3...
+
+⚠️  Rate limited! Waiting 240s before retry 3/3...
+Failed after 3 retries for artist 7Ah0xZVyWfAL3Vd7OVvKuo
+
+⚠️  Rate limited! Waiting 60s before retry 1/3...
+
+⚠️  Rate limited! Waiting 120s before retry 2/3...
+
+⚠️  Rate limited! Waiting 240s before retry 3/3...
+Failed after 3 retries for artist 1gLcT6lcN6AHTRdpRSXAyi
+
+⚠️  Rate limited! Waiting 60s before retry 1/3...
+
+⚠️  Rate limited! Waiting 120s before retry 2/3...
+
+⚠️  Rate limited! Waiting 240s before retry 3/3...
+Failed after 3 retries for artist 0jpSfOVe0Lec1vz5VjQH7S
+
+⚠️  Rate limited! Waiting 60s before retry 1/3...
+
+⚠️  Rate limited! Waiting 120s before retry 2/3...
+
+⚠️  Rate limited! Waiting 240s before retry 3/3...
+Failed after 3 retries for artist 4V8LLVI7PbaPR0K2TGSxFF
+
+⚠️  Rate limited! Waiting 60s before retry 1/3...
+
+⚠️  Rate limited! Waiting 120s before retry 2/3...
+
+⚠️  Rate limited! Waiting 240s before retry 3/3...
+Failed after 3 retries for artist 2yQf6b8hxahZaT5dHlWaB1
+
+= Refreshing access token...
+ Token refreshed
+
+⚠️  Rate limited! Waiting 60s before retry 1/3...
+
+⚠️  Rate limited! Waiting 120s before retry 2/3...
+
+⚠️  Rate limited! Waiting 240s before retry 3/3...
+Failed after 3 retries for artist 4bOqkIGQCcuZgjfDxNuX1I
+
+⚠️  Rate limited! Waiting 60s before retry 1/3...
+
+⚠️  Rate limited! Waiting 120s before retry 2/3...
+
+⚠️  Rate limited! Waiting 240s before retry 3/3...
+Failed after 3 retries for artist 5A7T1LAGJg5NXySBoIKUmF
+
+⚠️  Rate limited! Waiting 60s before retry 1/3...
+
+⚠️  Rate limited! Waiting 120s before retry 2/3...
+
+⚠️  Rate limited! Waiting 240s before retry 3/3...
+Failed after 3 retries for artist 4yfPiAauSgUfyc4k4WtwM9
+
+⚠️  Rate limited! Waiting 60s before retry 1/3...
+
+⚠️  Rate limited! Waiting 120s before retry 2/3...
+
+⚠️  Rate limited! Waiting 240s before retry 3/3...
+Failed after 3 retries for artist 0fTSzq9jAh4c36UVb4V7CB
+
+⚠️  Rate limited! Waiting 60s before retry 1/3...
+
+⚠️  Rate limited! Waiting 120s before retry 2/3...
+
+⚠️  Rate limited! Waiting 240s before retry 3/3...
+Failed after 3 retries for artist 4mcHKwboFDmpDBQ4fiOrf3
+💾 Progress saved: 160 artists processed (Success: 84, Failed: 76)
+
+= Refreshing access token...
+ Token refreshed
+
+⚠️  Rate limited! Waiting 60s before retry 1/3...
+
+⚠️  Rate limited! Waiting 120s before retry 2/3...
+
+⚠️  Rate limited! Waiting 240s before retry 3/3...
+Failed after 3 retries for artist 6kEyGr2dFnzcKGxpHmnJnn
+
+⚠️  Rate limited! Waiting 60s before retry 1/3...
+
+⚠️  Rate limited! Waiting 120s before retry 2/3...
+
+⚠️  Rate limited! Waiting 240s before retry 3/3...
+Failed after 3 retries for artist 6hkch2KhRl0tywpeVK5xR5
+
+⚠️  Rate limited! Waiting 60s before retry 1/3...
+
+⚠️  Rate limited! Waiting 120s before retry 2/3...
+
+⚠️  Rate limited! Waiting 240s before retry 3/3...
+Failed after 3 retries for artist 7A8S43ryYdbWpJKeHRZRcq
+
+⚠️  Rate limited! Waiting 60s before retry 1/3...
+
+⚠️  Rate limited! Waiting 120s before retry 2/3...
+
+⚠️  Rate limited! Waiting 240s before retry 3/3...
+Failed after 3 retries for artist 58yu67FLeWi0auMgHNfIHt
+
+⚠️  Rate limited! Waiting 60s before retry 1/3...
+
+⚠️  Rate limited! Waiting 120s before retry 2/3...
+
+⚠️  Rate limited! Waiting 240s before retry 3/3...
+Failed after 3 retries for artist 1EeZGqKiuxGQlAWqGDkd1C
+
+= Refreshing access token...
+ Token refreshed
+
+⚠️  Rate limited! Waiting 60s before retry 1/3...
+
+⚠️  Rate limited! Waiting 120s before retry 2/3...
+
+⚠️  Rate limited! Waiting 240s before retry 3/3...
+Failed after 3 retries for artist 2wAPeWKKHrPZ3UUqnw9Bpy
+
+⚠️  Rate limited! Waiting 60s before retry 1/3...
+
+⚠️  Rate limited! Waiting 120s before retry 2/3...
+
+⚠️  Rate limited! Waiting 240s before retry 3/3...
+Failed after 3 retries for artist 5m8H6zSadhu1j9Yi04VLqD
+
+⚠️  Rate limited! Waiting 60s before retry 1/3...
+
+⚠️  Rate limited! Waiting 120s before retry 2/3...
+
+⚠️  Rate limited! Waiting 240s before retry 3/3...
+Failed after 3 retries for artist 7IrBqZo6diq3hV3GpUhrs2
+
+⚠️  Rate limited! Waiting 60s before retry 1/3...
+
+⚠️  Rate limited! Waiting 120s before retry 2/3...
+
+⚠️  Rate limited! Waiting 240s before retry 3/3...
+Failed after 3 retries for artist 3wcj11K77LjEY1PkEazffa
+
+⚠️  Rate limited! Waiting 60s before retry 1/3...
+
+⚠️  Rate limited! Waiting 120s before retry 2/3...
+
+⚠️  Rate limited! Waiting 240s before retry 3/3...
+Failed after 3 retries for artist 6hj2p7pzusn5Fcdi35Yedr
+
+= Refreshing access token...
+ Token refreshed
+
+⚠️  Rate limited! Waiting 60s before retry 1/3...
+
+⚠️  Rate limited! Waiting 120s before retry 2/3...
+
+⚠️  Rate limited! Waiting 240s before retry 3/3...
+Failed after 3 retries for artist 6lcwlkAjBPSKnFBZjjZFJs
+
+⚠️  Rate limited! Waiting 60s before retry 1/3...
+
+⚠️  Rate limited! Waiting 120s before retry 2/3...
+
+⚠️  Rate limited! Waiting 240s before retry 3/3...
+Failed after 3 retries for artist 3XxrXIYWH5PpuTbYSXDOZw
+
+⚠️  Rate limited! Waiting 60s before retry 1/3...
+
+⚠️  Rate limited! Waiting 120s before retry 2/3...
+
+⚠️  Rate limited! Waiting 240s before retry 3/3...
+Failed after 3 retries for artist 2VFnxZPBUoglahI0kc6dvc
+
+⚠️  Rate limited! Waiting 60s before retry 1/3...
+
+⚠️  Rate limited! Waiting 120s before retry 2/3...
+
+⚠️  Rate limited! Waiting 240s before retry 3/3...
+Failed after 3 retries for artist 2yKb2sD6dystFr0tTmSu2X
+
+⚠️  Rate limited! Waiting 60s before retry 1/3...
+
+⚠️  Rate limited! Waiting 120s before retry 2/3...
+
+⚠️  Rate limited! Waiting 240s before retry 3/3...
+Failed after 3 retries for artist 5Rjjv8zylcQ7E6BdboJu2A
+
+= Refreshing access token...
+ Token refreshed
+
+⚠️  Rate limited! Waiting 60s before retry 1/3...
+
+⚠️  Rate limited! Waiting 120s before retry 2/3...
+
+⚠️  Rate limited! Waiting 240s before retry 3/3...
+Failed after 3 retries for artist 5CuU6SRJjbbZL926nSGGxX
+
+⚠️  Rate limited! Waiting 60s before retry 1/3...
+
+⚠️  Rate limited! Waiting 120s before retry 2/3...
+
+⚠️  Rate limited! Waiting 240s before retry 3/3...
+Failed after 3 retries for artist 13VynrBSvRLrAX5YqdD1vl
+
+⚠️  Rate limited! Waiting 60s before retry 1/3...
+
+⚠️  Rate limited! Waiting 120s before retry 2/3...
+
+⚠️  Rate limited! Waiting 240s before retry 3/3...
+Failed after 3 retries for artist 4VnaEWTHIwbqbDCwNPpfde
+
+⚠️  Rate limited! Waiting 60s before retry 1/3...
+
+⚠️  Rate limited! Waiting 120s before retry 2/3...
+
+⚠️  Rate limited! Waiting 240s before retry 3/3...
+Failed after 3 retries for artist 2TwOrUcYnAlIiKmVQkkoSZ
+
+⚠️  Rate limited! Waiting 60s before retry 1/3...
+
+⚠️  Rate limited! Waiting 120s before retry 2/3...
+
+⚠️  Rate limited! Waiting 240s before retry 3/3...
+Failed after 3 retries for artist 1vkVP0FhEbUzaU1ztl7YmK
+💾 Progress saved: 180 artists processed (Success: 84, Failed: 96)
+
+= Refreshing access token...
+ Token refreshed
+
+⚠️  Rate limited! Waiting 60s before retry 1/3...
+
+⚠️  Rate limited! Waiting 120s before retry 2/3...
+
+⚠️  Rate limited! Waiting 240s before retry 3/3...
+Failed after 3 retries for artist 079cEjjSpv5dOLH5xsGdvN
+
+⚠️  Rate limited! Waiting 60s before retry 1/3...
+
+⚠️  Rate limited! Waiting 120s before retry 2/3...
+
+⚠️  Rate limited! Waiting 240s before retry 3/3...
+Failed after 3 retries for artist 1KsASRNugxU85T0u6zSg32
+
+⚠️  Rate limited! Waiting 60s before retry 1/3...
+
+⚠️  Rate limited! Waiting 120s before retry 2/3...
+
+⚠️  Rate limited! Waiting 240s before retry 3/3...
+Failed after 3 retries for artist 6bUJpbekaIlq2fT5FMV2mQ
+
+⚠️  Rate limited! Waiting 60s before retry 1/3...
+
+⚠️  Rate limited! Waiting 120s before retry 2/3...
+
+⚠️  Rate limited! Waiting 240s before retry 3/3...
+Failed after 3 retries for artist 2J257euzcjnDLipsyJH3F2
+
+⚠️  Rate limited! Waiting 60s before retry 1/3...
+
+⚠️  Rate limited! Waiting 120s before retry 2/3...
+
+⚠️  Rate limited! Waiting 240s before retry 3/3...
+Failed after 3 retries for artist 1Ry5NkSxX1Ye7kTfUuLL2c
+
+= Refreshing access token...
+ Token refreshed
+
+⚠️  Rate limited! Waiting 60s before retry 1/3...
+
+⚠️  Rate limited! Waiting 120s before retry 2/3...
+
+⚠️  Rate limited! Waiting 240s before retry 3/3...
+Failed after 3 retries for artist 5KUuALDuZaq5ZutWlz0EsT
+
+⚠️  Rate limited! Waiting 60s before retry 1/3...
+
+⚠️  Rate limited! Waiting 120s before retry 2/3...
+
+⚠️  Rate limited! Waiting 240s before retry 3/3...
+Failed after 3 retries for artist 6z7qEMTNZigz2k3qozRYw1
+
+⚠️  Rate limited! Waiting 60s before retry 1/3...
+
+⚠️  Rate limited! Waiting 120s before retry 2/3...
+
+⚠️  Rate limited! Waiting 240s before retry 3/3...
+Failed after 3 retries for artist 1RpHbIW5eeEBs693nyrhSa
+
+⚠️  Rate limited! Waiting 60s before retry 1/3...
+
+⚠️  Rate limited! Waiting 120s before retry 2/3...
+
+⚠️  Rate limited! Waiting 240s before retry 3/3...
+Failed after 3 retries for artist 1hJO0ngj5eZT0uNzuZpXi8
+
+⚠️  Rate limited! Waiting 60s before retry 1/3...
+
+⚠️  Rate limited! Waiting 120s before retry 2/3...
+
+⚠️  Rate limited! Waiting 240s before retry 3/3...
+Failed after 3 retries for artist 0F2wxiqB68YCLtQaCe9e6Z
+
+= Refreshing access token...
+ Token refreshed
+
+⚠️  Rate limited! Waiting 60s before retry 1/3...
+
+⚠️  Rate limited! Waiting 120s before retry 2/3...
+
+⚠️  Rate limited! Waiting 240s before retry 3/3...
+Failed after 3 retries for artist 6LqNN22kT3074XbTVUrhzX
+
+⚠️  Rate limited! Waiting 60s before retry 1/3...
+
+⚠️  Rate limited! Waiting 120s before retry 2/3...
+
+⚠️  Rate limited! Waiting 240s before retry 3/3...
+Failed after 3 retries for artist 3vAaWhdBR38Q02ohXqaNHT
+
+⚠️  Rate limited! Waiting 60s before retry 1/3...
+
+⚠️  Rate limited! Waiting 120s before retry 2/3...
+
+⚠️  Rate limited! Waiting 240s before retry 3/3...
+Failed after 3 retries for artist 3CE6MgsLpKMDfYFtexgc8U
+
+⚠️  Rate limited! Waiting 60s before retry 1/3...
+
+⚠️  Rate limited! Waiting 120s before retry 2/3...
+
+⚠️  Rate limited! Waiting 240s before retry 3/3...
+Failed after 3 retries for artist 4ITyby2i26NhM69kXNpIdR
+
+⚠️  Rate limited! Waiting 60s before retry 1/3...
+
+⚠️  Rate limited! Waiting 120s before retry 2/3...
+
+⚠️  Rate limited! Waiting 240s before retry 3/3...
+Failed after 3 retries for artist 1JFW3ACD123onrCbzNag5Z
+
+= Refreshing access token...
+ Token refreshed
+
+⚠️  Rate limited! Waiting 60s before retry 1/3...
+
+⚠️  Rate limited! Waiting 120s before retry 2/3...
+
+⚠️  Rate limited! Waiting 240s before retry 3/3...
+Failed after 3 retries for artist 6xS5PpBWaVYraexEkEjjXv
+
+⚠️  Rate limited! Waiting 60s before retry 1/3...
+
+⚠️  Rate limited! Waiting 120s before retry 2/3...
+
+⚠️  Rate limited! Waiting 240s before retry 3/3...
+Failed after 3 retries for artist 7CKkZZW3XtnPmqlwaElmoV
+
+L Error: 'float' object is not subscriptable
+Processing: Juan Wauters                       : :   4%|▍         | 197/5179 [15:54:04<402:08:00]

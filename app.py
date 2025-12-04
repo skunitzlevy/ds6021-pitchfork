@@ -2,7 +2,7 @@
 import pandas as pd
 from dash import Dash, html, dcc, Input, Output, dash_table
 from summary_charts import summary_charts
-
+import os
 
 # Load data
 df = pd.read_csv('Cleaned_Data.csv')
@@ -160,5 +160,10 @@ def update_eda(_):
         figs["pitchfork_review_counts"]
     )
 
+#if __name__ == "__main__":
+#    app.run(debug=True)
+
 if __name__ == "__main__":
-    app.run(debug=True)
+    port = int(os.environ.get("PORT", 8050))  # Render sets this automatically
+    debug = True  # set False if you want production mode
+    app.run(debug=debug, host="0.0.0.0", port=port)

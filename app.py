@@ -71,7 +71,6 @@ app.layout = html.Div(style={'fontFamily': 'Arial, sans-serif', 'backgroundColor
                 dcc.Graph(id='score_vs_length'),
                 dcc.Graph(id='pitchfork_score_distribution'),
                 dcc.Graph(id='pitchfork_review_counts'),
-                # Dummy hidden div to trigger callback
                 html.Div(id='dummy-eda-trigger', style={'display': 'none'})
             ])
         ]),
@@ -158,4 +157,4 @@ def update_eda(_):
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 8050))
     debug = True
-    app.run(debug=debug, host="0.0.0.0", port=port)
+    app.run(debug=debug, port=port)

@@ -6,7 +6,6 @@ from typing import Dict
 
 def summary_charts(df: pd.DataFrame) -> Dict[str, object]:
     """
-    Returns Plotly figures for EDA using exact naming from shared code.
     Charts:
     - followers_vs_score_by_artist
     - score_vs_length
@@ -16,12 +15,8 @@ def summary_charts(df: pd.DataFrame) -> Dict[str, object]:
 
     figs = {}
 
-    # Drop rows with essential NaNs
     df1 = df.dropna(subset=['followers_count', 'score', 'length', 'review_release_difference']).copy()
 
-    # -------------------------
-    # Artist-level aggregation
-    # -------------------------
     artist_df = df1.groupby('artist')[['followers_count', 'score', 'main_genre']].agg({
         'followers_count': 'mean',
         'score': 'mean',
@@ -31,9 +26,6 @@ def summary_charts(df: pd.DataFrame) -> Dict[str, object]:
     artist_df['followers_count'] = artist_df['followers_count'].replace(0, 1)
     artist_df['log_followers'] = np.log10(artist_df['followers_count'])
 
-    # -------------------------
-    # OLS trendline for artist_df
-    # -------------------------
     if len(artist_df) >= 2:
         coef_artist = np.polyfit(artist_df['log_followers'], artist_df['score'], 1)
         x_artist_line = np.linspace(artist_df['log_followers'].min(), artist_df['log_followers'].max(), 100)
@@ -41,9 +33,7 @@ def summary_charts(df: pd.DataFrame) -> Dict[str, object]:
     else:
         x_artist_line, y_artist_line = [], []
 
-    # -------------------------
     # Chart: followers_vs_score_by_artist
-    # -------------------------
     followers_vs_score_by_artist = px.scatter(
         artist_df,
         x='log_followers',
@@ -53,7 +43,6 @@ def summary_charts(df: pd.DataFrame) -> Dict[str, object]:
         height=500
     )
 
-    # Add trendline last to appear on top
     if len(x_artist_line) > 0:
         trendline_artist = go.Scatter(
             x=x_artist_line,
@@ -67,9 +56,6 @@ def summary_charts(df: pd.DataFrame) -> Dict[str, object]:
 
     figs['followers_vs_score_by_artist'] = followers_vs_score_by_artist
 
-    # -------------------------
-    # Prepare log_length and age_category
-    # -------------------------
     df1 = df1[df1['length'] > 0].copy()
     df1['log_length'] = np.log(df1['length'])
     df1['age_category'] = pd.cut(
@@ -78,7 +64,6 @@ def summary_charts(df: pd.DataFrame) -> Dict[str, object]:
         labels=['New', 'Recent', 'Old', 'Vintage']
     )
 
-    # OLS trendline for log_length vs score
     if len(df1) >= 2:
         coef_length = np.polyfit(df1['log_length'], df1['score'], 1)
         x_length_line = np.linspace(df1['log_length'].min(), df1['log_length'].max(), 100)
@@ -86,9 +71,7 @@ def summary_charts(df: pd.DataFrame) -> Dict[str, object]:
     else:
         x_length_line, y_length_line = [], []
 
-    # -------------------------
     # Chart: score_vs_length
-    # -------------------------
     score_vs_length = px.scatter(
         df1,
         x='log_length',
@@ -111,9 +94,7 @@ def summary_charts(df: pd.DataFrame) -> Dict[str, object]:
 
     figs['score_vs_length'] = score_vs_length
 
-    # -------------------------
     # Chart: pitchfork_score_distribution
-    # -------------------------
     pitchfork_score_distribution = px.histogram(
         df,
         x='score',
@@ -124,9 +105,7 @@ def summary_charts(df: pd.DataFrame) -> Dict[str, object]:
     )
     figs['pitchfork_score_distribution'] = pitchfork_score_distribution
 
-    # -------------------------
     # Chart: pitchfork_review_counts (Top 5 genres)
-    # -------------------------
     top5 = df['genre'].value_counts().head(5)
     pitchfork_review_counts = px.bar(
         x=top5.values,

@@ -1,20 +1,15 @@
-# app.py
 import pandas as pd
 from dash import Dash, html, dcc, Input, Output, dash_table
 from summary_charts import summary_charts
 import os
 
-# Load data
 df = pd.read_csv('Cleaned_Data.csv')
 
-# Initialize app
 app = Dash(__name__)
 server = app.server
 
-# Constants for Data Preview
 ROW_OPTIONS = [25, 50, 100]
 
-# Shared styles
 card_style = {
     'padding': '20px', 
     'margin': '20px 0', 
@@ -149,7 +144,7 @@ from summary_charts import summary_charts
     Output("score_vs_length", "figure"),
     Output("pitchfork_score_distribution", "figure"),
     Output("pitchfork_review_counts", "figure"),
-    Input("dummy-eda-trigger", "children")  # just triggers once
+    Input("dummy-eda-trigger", "children")
 )
 def update_eda(_):
     figs = summary_charts(df)
@@ -160,10 +155,7 @@ def update_eda(_):
         figs["pitchfork_review_counts"]
     )
 
-#if __name__ == "__main__":
-#    app.run(debug=True)
-
 if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 8050))  # Render sets this automatically
-    debug = True  # set False if you want production mode
+    port = int(os.environ.get("PORT", 8050))
+    debug = True
     app.run(debug=debug, host="0.0.0.0", port=port)

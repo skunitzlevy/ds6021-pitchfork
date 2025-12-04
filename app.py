@@ -71,7 +71,6 @@ app.layout = html.Div(style={'fontFamily': 'Arial, sans-serif', 'backgroundColor
                 dcc.Graph(id='score_vs_length'),
                 dcc.Graph(id='pitchfork_score_distribution'),
                 dcc.Graph(id='pitchfork_review_counts'),
-                # Dummy hidden div to trigger callback
                 html.Div(id='dummy-eda-trigger', style={'display': 'none'})
             ])
         ]),

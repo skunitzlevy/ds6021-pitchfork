@@ -157,4 +157,4 @@ def update_eda(_):
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 8050))
     debug = True
-    app.run(debug=debug, port=port)
+    app.run(debug=debug, host="0.0.0.0", port=port)

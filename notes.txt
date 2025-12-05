@@ -1,26 +1,26 @@
 Numerical:
-- Review score
-- Length of review
-- How many links in the review
-- Difference (in yrs) between review date and album date (0 for most)
-- Word-specific counts(?)
+x - Review score
+x - Length of review
+o - How many links in the review
+o - Difference (in yrs) between review date and album date (0 for most)
+o - Word-specific counts(?)
 
 Categorical:
-- Artist
-- Genre
-- Music Label
-- Reviewer
-- Reissue or not (1/0)
-- Review # of reviews
+x - Artist
+x - Genre
+x - Music Label
+x - Reviewer
+o - Reissue or not (1/0)
+- Reviewer # of reviews
 - Artist # of albums
 
 Time:
-- Review date
-- Album year
+x - Review date
+x - Album year
 
 Spotify API (potential):
-- Artist Followers
-- # of tracks in the album
+x - Artist Followers
+x - # of tracks in the album
 
 Hypotheses:
 - Reviewer toughness

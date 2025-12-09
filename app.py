@@ -1,6 +1,7 @@
 import pandas as pd
 from dash import Dash, html, dcc, Input, Output, dash_table
 from summary_charts import summary_charts
+from pca_model import run_pca
 import os
 
 df = pd.read_csv('Cleaned_Data.csv')
@@ -71,6 +72,8 @@ app.layout = html.Div(style={'fontFamily': 'Arial, sans-serif', 'backgroundColor
                 dcc.Graph(id='score_vs_length'),
                 dcc.Graph(id='pitchfork_score_distribution'),
                 dcc.Graph(id='pitchfork_review_counts'),
+                dcc.Graph(id='genre_score_boxplot'),
+                dcc.Graph(id='top_artists_by_reviews'),
                 html.Div(id='dummy-eda-trigger', style={'display': 'none'})
             ])
         ]),
@@ -121,6 +124,20 @@ app.layout = html.Div(style={'fontFamily': 'Arial, sans-serif', 'backgroundColor
                     html.P("Model outputs will appear here.")
                 ], style={'marginTop': '30px'})
             ])
+        ]),
+
+        # PCA Tab
+        dcc.Tab(label="PCA Analysis", children=[
+            html.Div(style=card_style, children=[
+                html.H3("Principal Component Analysis"),
+                dcc.Graph(id="pca_scree_plot"),
+                dcc.Graph(id="pca_cumulative_plot"),
+                dcc.Graph(id="pca_scatter_plot"),
+                dash_table.DataTable(id="pca_loadings_table",
+                                    columns=[{"name": col, "id": col} for col in ["Feature"] + [f"PC{i}" for i in range(1,9)]],
+                                    style_table={'overflowX':'auto'},
+                                    style_cell={'textAlign':'left'})
+            ])
         ])
     ])
 ])
@@ -143,6 +160,8 @@ from summary_charts import summary_charts
     Output("score_vs_length", "figure"),
     Output("pitchfork_score_distribution", "figure"),
     Output("pitchfork_review_counts", "figure"),
+    Output("genre_score_boxplot", "figure"),
+    Output("top_artists_by_reviews", "figure"),
     Input("dummy-eda-trigger", "children")
 )
 def update_eda(_):
@@ -151,8 +170,22 @@ def update_eda(_):
         figs["followers_vs_score_by_artist"],
         figs["score_vs_length"],
         figs["pitchfork_score_distribution"],
-        figs["pitchfork_review_counts"]
+        figs["pitchfork_review_counts"],
+        figs["genre_score_boxplot"],
+        figs["top_artists_by_reviews"]
     )
+
+@app.callback(
+    Output("pca_scree_plot", "figure"),
+    Output("pca_cumulative_plot", "figure"),
+    Output("pca_scatter_plot", "figure"),
+    Output("pca_loadings_table", "data"),
+    Input("dummy-eda-trigger", "children")
+)
+def update_pca(_):
+    figs = run_pca(df)
+    loadings_df = figs["loadings"].reset_index().rename(columns={"index":"Feature"})
+    return figs["scree"], figs["cumulative"], figs["scatter"], loadings_df.to_dict("records")
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 8050))

@@ -105,8 +105,8 @@ def summary_charts(df: pd.DataFrame) -> Dict[str, object]:
     )
     figs['pitchfork_score_distribution'] = pitchfork_score_distribution
 
-    # Chart: pitchfork_review_counts (Top 5 genres)
-    top5 = df['genre'].value_counts().head(5)
+    # Chart: pitchfork_review_counts
+    top5 = df['genre'].value_counts().head(5).sort_values(ascending=True)
     pitchfork_review_counts = px.bar(
         x=top5.values,
         y=top5.index,
@@ -116,5 +116,65 @@ def summary_charts(df: pd.DataFrame) -> Dict[str, object]:
         height=450
     )
     figs['pitchfork_review_counts'] = pitchfork_review_counts
+
+    # Chart: genre_score_boxplot
+    #clean_df = pd.read_csv("out/pitchfork_reviews_clean_MAO.csv")
+
+    temp = df.copy()
+    #temp["main_genre"] = clean_df["main_genre"]
+
+    valid_genres = (
+        temp["main_genre"]
+        .value_counts()
+        .loc[lambda s: s >= 20]
+        .index
+    )
+
+    filtered = temp[temp["main_genre"].isin(valid_genres)]
+
+    genre_fig = px.box(
+        filtered,
+        x="main_genre",
+        y="score",
+        title="Score by Main Genre",
+        labels={"main_genre": "Main Genre", "score": "Score"},
+    )
+
+    genre_fig.update_layout(
+        xaxis_tickangle=45,
+        margin=dict(l=20, r=20, t=50, b=80),
+        template="plotly_white"
+    )
+
+    figs["genre_score_boxplot"] = genre_fig
+
+    #Chart: top_artists_by_reviews
+    filtered_df = df[df["artist"] != "Various Artists"]
+
+    top_artists_by_n = (
+        filtered_df.groupby("artist")
+                .size()
+                .sort_values(ascending=False)
+                .head(10)
+                .reset_index(name="n_reviews")
+    )
+
+    top_artists_by_n = top_artists_by_n.sort_values("n_reviews", ascending=True)
+
+    top_artists_fig = px.bar(
+        top_artists_by_n,
+        x="n_reviews",
+        y="artist",
+        orientation="h",
+        title="Top 10 Artists by Number of Reviews",
+        labels={"n_reviews": "Number of Reviews", "artist": "Artist"}
+    )
+
+    top_artists_fig.update_layout(
+        template="plotly_white",
+        margin=dict(l=60, r=20, t=50, b=40)
+    )
+
+    figs["top_artists_by_reviews"] = top_artists_fig
 
     return figs

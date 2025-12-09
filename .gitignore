@@ -1,3 +1,4 @@
 run.log
 out/*_batch_*.csv
-_d.ipynb
+_d.ipynb.DS_Store
+.DS_Store

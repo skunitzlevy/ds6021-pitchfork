@@ -7,6 +7,7 @@ from linreg import run_linear_regression
 from KNN import knn_model
 import os
 from spline import run_spline_regression
+from elastic import run_elastic_net
 
 df = pd.read_csv('../data/clean/Cleaned_Data.csv')
 #add log transformations
@@ -138,6 +139,51 @@ app.layout = html.Div(style={'fontFamily': 'Arial, sans-serif', 'backgroundColor
                     html.P("Model outputs will appear here.")
                 ], style={'marginTop': '30px'})
             ]), 
+
+            #Elastic Net
+            html.Div(style=card_style, children=[
+                html.H3("Elastic Net Regression"),
+                html.P("Linear regression with combined L1 (Lasso) and L2 (Ridge) regularization."),
+                
+                html.Div([
+                    html.Label(html.Strong("Select Independent Variables (X):")),
+                    dcc.Checklist(
+                        id='elastic-feature-checklist',
+                        options=[{'label': col, 'value': col} for col in df.select_dtypes(include=[np.number]).columns if col not in ['score', 'sqrt_score']],
+                        value=[col for col in df.select_dtypes(include=[np.number]).columns if col not in ['score', 'sqrt_score', 'sq_length']],
+                        inline=True,
+                        style={'fontSize': '16px', 'marginTop': '10px'}
+                    ),
+                    
+                    # Alpha Slider
+                    html.Label("Alpha (Regularization Strength):", style={'marginTop': '20px', 'fontWeight': 'bold'}),
+                    html.P("Set to 0 to auto-optimize Alpha.", style={'fontSize': '12px', 'color': 'gray'}),
+                    dcc.Slider(
+                        id='elastic-alpha-slider',
+                        min=0, max=5, step=0.1, value=0,
+                        marks={0: {'label': 'Auto', 'style': {'color': 'blue'}}, 1: '1', 2: '2', 5: '5'},
+                        tooltip={"placement": "bottom", "always_visible": True}
+                    ),
+
+                    # L1 Ratio Slider
+                    html.Label("L1 Ratio (Mix of Lasso/Ridge):", style={'marginTop': '20px', 'fontWeight': 'bold'}),
+                    html.P("0 = Ridge, 1 = Lasso. (Ignored if Alpha is Auto)", style={'fontSize': '12px', 'color': 'gray'}),
+                    dcc.Slider(
+                        id='elastic-l1-slider',
+                        min=0, max=1, step=0.1, value=0.5,
+                        marks={0: 'Ridge', 0.5: 'Mix', 1: 'Lasso'},
+                        tooltip={"placement": "bottom", "always_visible": True}
+                    )
+                ], style={'padding': '15px', 'backgroundColor': '#f9f9f9', 'marginBottom': '20px'}),
+
+                dcc.Loading(children=[
+                    html.Div([
+                        html.Div([dcc.Graph(id='elastic-graph')], style={'width': '65%', 'display': 'inline-block', 'verticalAlign': 'top'}),
+                        html.Div([html.H4("Elastic Net Statistics"), html.Div(id='elastic-stats', style={'whiteSpace': 'pre-line'})], 
+                                 style={'width': '30%', 'display': 'inline-block', 'paddingLeft': '20px', 'verticalAlign': 'top'})
+                    ])
+                ])
+            ]),
 
             # Linear Reg
             html.Div(style=card_style, children=[
@@ -298,6 +344,17 @@ def update_pca(_):
     figs = run_pca(df)
     loadings_df = figs["loadings"].reset_index().rename(columns={"index":"Feature"})
     return figs["scree"], figs["cumulative"], figs["scatter"], loadings_df.to_dict("records")
+
+# Elastic Net Callback
+@app.callback(
+    [Output('elastic-graph', 'figure'),
+     Output('elastic-stats', 'children')],
+    [Input('elastic-feature-checklist', 'value'),
+     Input('elastic-alpha-slider', 'value'),
+     Input('elastic-l1-slider', 'value')]
+)
+def update_elastic_graph(selected_features, alpha, l1_ratio):
+    return run_elastic_net(df, selected_features, alpha_val=alpha, l1_ratio_val=l1_ratio)
 
 # Linear Regression Callback
 @app.callback(

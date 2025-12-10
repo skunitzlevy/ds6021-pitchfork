@@ -8,6 +8,10 @@ from KNN import knn_model
 import os
 
 df = pd.read_csv('../data/clean/Cleaned_Data.csv')
+df['log_followers_count'] = np.log(df['followers_count'])
+df['log_length'] = np.log(df['length'])
+df['sqrt_followers_count'] = np.sqrt(df['followers_count'])
+df['sqrt_length'] = np.sqrt(df['length'])
 
 app = Dash(__name__)
 server = app.server

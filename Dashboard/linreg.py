@@ -18,7 +18,9 @@ def run_linear_regression(df, selected_features):
     '''
 
     target_col = 'score' 
-    temp_df = df[selected_features + [target_col]].dropna()
+    temp_df = df[selected_features + [target_col]]
+    temp_df.replace([np.inf, -np.inf], np.nan, inplace=True)
+    temp_df.dropna(inplace=True)
     
     X = temp_df[selected_features]
     y = temp_df[target_col]
@@ -37,6 +39,19 @@ def run_linear_regression(df, selected_features):
         title=f'Actual vs. Predicted Score (n={len(temp_df)})',
         opacity=0.6,
         template='plotly_white'
+    )
+    fig.add_shape(
+            type="line",
+            line=dict(dash="dash", width=3, color="red"),
+            x0=y.min(), x1=y.max(),
+            y0=y.min(), y1=y.max()
+        )
+        
+    fig.add_annotation(
+        x=y.min(), y=y.max(),
+        text="Perfect Fit (y=x)",
+        showarrow=False,
+        yshift=10
     )
 
     # 5. Format Statistics

@@ -52,7 +52,7 @@ def run_pca(df):
         pc_df, x="PC1", y="PC2", color="Genre",
         title="PCA: PC1 vs PC2",
         labels={"PC1":"PC1", "PC2":"PC2", "Genre":"Main Genre"},
-        width=800, height=600
+        width=1200, height=600
     )
 
     # Loadings table

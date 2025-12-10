@@ -6,13 +6,19 @@ from pca_model import run_pca
 from linreg import run_linear_regression 
 from KNN import knn_model
 import os
+from spline import run_spline_regression
 
 df = pd.read_csv('../data/clean/Cleaned_Data.csv')
-df['log_followers_count'] = np.log(df['followers_count'])
-df['log_length'] = np.log(df['length'])
+#add log transformations
+df['log_followers_count'] = np.log(df['followers_count']+1)
+df['log_length'] = np.log(df['length']+1)
+df['log_review_release_difference'] = np.log(df['review_release_difference']+1)
+
+#add square and square root transformations
 df['sqrt_followers_count'] = np.sqrt(df['followers_count'])
 df['sqrt_length'] = np.sqrt(df['length'])
 df['sqrt_score'] = np.sqrt(df['score'])
+df['sq_length'] = np.square(df['length'])
 
 app = Dash(__name__)
 server = app.server
@@ -142,7 +148,7 @@ app.layout = html.Div(style={'fontFamily': 'Arial, sans-serif', 'backgroundColor
                     dcc.Checklist(
                         id='lr-feature-checklist',
                         options=[{'label': col, 'value': col} for col in df.select_dtypes(include=[np.number]).columns if col not in ['score','sqrt_score']],
-                        value=[col for col in df.select_dtypes(include=[np.number]).columns if col != 'score'][:2], 
+                        value=[col for col in df.select_dtypes(include=[np.number]).columns if col != 'score'][6:7], 
                         inline=True,
                         style={'fontSize': '16px', 'marginTop': '10px'}
                     ),
@@ -158,6 +164,46 @@ app.layout = html.Div(style={'fontFamily': 'Arial, sans-serif', 'backgroundColor
                     html.Div([
                         html.H4("Model Statistics"),
                         html.Div(id='lr-stats', style={'whiteSpace': 'pre-line', 'fontSize': '15px'})
+                    ], style={'width': '30%', 'display': 'inline-block', 'paddingLeft': '20px', 'verticalAlign': 'top'})
+                ])
+            ]),
+
+            # Spline reg
+            html.Div(style=card_style, children=[
+                html.H3("Spline Regression (Multi-Variable)"),
+                html.P("Fits a model where relationships can change direction at the 'Knot' point."),
+                
+                html.Div([
+                    html.Label(html.Strong("Select Independent Variables (X):")),
+                    dcc.Checklist(
+                        id='spline-feature-checklist',
+                        options=[
+                            {'label': col, 'value': col} 
+                            for col in df.select_dtypes(include=[np.number]).columns 
+                            if col not in ['score', 'sqrt_score']
+                        ],
+                        value=['log_length'],
+                        inline=True,
+                        style={'fontSize': '16px', 'marginTop': '10px'}
+                    ),
+                    
+                    html.Label("Knot Location (Quantile):", style={'marginTop': '20px', 'fontWeight': 'bold'}),
+                    dcc.Slider(
+                        id='spline-knot-slider',
+                        min=0.1,
+                        max=0.9,
+                        step=0.1,
+                        value=0.5,
+                        marks={0.1: '10%', 0.5: 'Median', 0.9: '90%'},
+                        tooltip={"placement": "bottom", "always_visible": True}
+                    )
+                ], style={'padding': '15px', 'backgroundColor': '#f9f9f9', 'marginBottom': '20px', 'borderRadius': '5px'}),
+
+                html.Div([
+                    html.Div([dcc.Graph(id='spline-graph')], style={'width': '65%', 'display': 'inline-block', 'verticalAlign': 'top'}),
+                    html.Div([
+                        html.H4("Spline Statistics"),
+                        html.Div(id='spline-stats', style={'whiteSpace': 'pre-line', 'fontSize': '15px'})
                     ], style={'width': '30%', 'display': 'inline-block', 'paddingLeft': '20px', 'verticalAlign': 'top'})
                 ])
             ]),
@@ -246,6 +292,16 @@ def update_pca(_):
 def update_lr_graph(selected_features):
     fig, stats = run_linear_regression(df, selected_features)
     return fig, stats
+
+# Spline Regression Callback
+@app.callback(
+    [Output('spline-graph', 'figure'),
+     Output('spline-stats', 'children')],
+    [Input('spline-feature-checklist', 'value'), # Input is now the checklist
+     Input('spline-knot-slider', 'value')]
+)
+def update_spline_graph(selected_features, knot_quantile):
+    return run_spline_regression(df, selected_features, knot_quantile)
 
 # KNN Callback
 @app.callback(

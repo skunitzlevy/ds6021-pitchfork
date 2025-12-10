@@ -149,7 +149,7 @@ app.layout = html.Div(style={'fontFamily': 'Arial, sans-serif', 'backgroundColor
                     dcc.Checklist(
                         id='lr-feature-checklist',
                         options=[{'label': col, 'value': col} for col in df.select_dtypes(include=[np.number]).columns if col not in ['score','sqrt_score']],
-                        value=[col for col in df.select_dtypes(include=[np.number]).columns if col != 'score'][6:7], 
+                        value=['log_length', 'log_followers_count', 'log_review_release_difference'],
                         inline=True,
                         style={'fontSize': '16px', 'marginTop': '10px'}
                     ),
@@ -172,7 +172,7 @@ app.layout = html.Div(style={'fontFamily': 'Arial, sans-serif', 'backgroundColor
             # Spline reg
             html.Div(style=card_style, children=[
                 html.H3("Spline Regression (Multi-Variable)"),
-                html.P("Fits a model where relationships can change direction at the 'Knot' point."),
+                html.P("Fits a spline model"),
                 
                 html.Div([
                     html.Label(html.Strong("Select Independent Variables (X):")),
@@ -183,7 +183,7 @@ app.layout = html.Div(style={'fontFamily': 'Arial, sans-serif', 'backgroundColor
                             for col in df.select_dtypes(include=[np.number]).columns 
                             if col not in ['score', 'sqrt_score']
                         ],
-                        value=['log_length'],
+                        value=['log_length', 'log_followers_count', 'log_review_release_difference'],
                         inline=True,
                         style={'fontSize': '16px', 'marginTop': '10px'}
                     ),

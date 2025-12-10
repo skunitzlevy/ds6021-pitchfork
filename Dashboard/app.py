@@ -139,6 +139,7 @@ app.layout = html.Div(style={'fontFamily': 'Arial, sans-serif', 'backgroundColor
                 ], style={'marginTop': '30px'})
             ]), 
 
+            # Linear Reg
             html.Div(style=card_style, children=[
                 html.H3("Linear Regression"),
                 html.P("Toggle variables below to predict the Pitchfork Score.", style={'marginBottom': '15px'}),
@@ -208,18 +209,33 @@ app.layout = html.Div(style={'fontFamily': 'Arial, sans-serif', 'backgroundColor
                 ])
             ]),
 
+            # KNN
             html.Div(style=card_style, children=[
                 html.H3("K-Nearest Neighbors Classifier"),
-                html.P("Train a KNN model to classify the target (e.g., Genre) based on audio features.", style={'marginBottom': '15px'}),
+                html.P("Classify 'Main Genre' based on audio features."),
                 
+                html.Div([
+                    html.Label(html.Strong("Number of Neighbors (k):")),
+                    html.P("Slider disabled? Set to 0 to run auto-optimization.", style={'fontSize': '12px', 'color': 'gray'}),
+                    dcc.Slider(
+                        id='knn-k-slider',
+                        min=1,
+                        max=20,
+                        step=1,
+                        value=3,
+                        marks={
+                            0: {'label': 'Auto', 'style': {'color': 'blue', 'fontWeight': 'bold'}},
+                            3: {'label': '3 (Opt)', 'style': {'color': 'green'}},
+                            10: '10',
+                            20: '20'
+                        },
+                        tooltip={"placement": "bottom", "always_visible": True}
+                    )
+                ], style={'padding': '15px', 'marginBottom': '20px'}),
+
                 dcc.Loading(id="loading-knn", type="default", children=[
                     html.Div([
-                        # Graph Section
-                        html.Div([
-                            dcc.Graph(id='knn-graph')
-                        ], style={'width': '65%', 'display': 'inline-block', 'verticalAlign': 'top', 'marginTop': '20px'}),
-                        
-                        # Stats Section
+                        html.Div([dcc.Graph(id='knn-graph')], style={'width': '65%', 'display': 'inline-block', 'verticalAlign': 'top'}),
                         html.Div(id='knn-stats', style={'width': '30%', 'display': 'inline-block', 'paddingLeft': '20px', 'verticalAlign': 'top', 'marginTop': '20px'})
                     ])
                 ])
@@ -307,10 +323,12 @@ def update_spline_graph(selected_features, knot_quantile):
 @app.callback(
     [Output('knn-graph', 'figure'),
      Output('knn-stats', 'children')],
-     [Input('dummy-eda-trigger', 'children')]
+     [Input('knn-k-slider', 'value')] # Add slider input
 )
-def update_knn_model(_):
-    return knn_model(df, target_col='genre')
+def update_knn_model(k_value):
+    # If slider is 0, pass None to trigger the "Optimizer" mode
+    k = k_value if k_value > 0 else None
+    return knn_model(df, target_col='main_genre', n_neighbors=k)
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 8050))

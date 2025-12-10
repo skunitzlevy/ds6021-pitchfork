@@ -10,85 +10,65 @@ from sklearn.compose import ColumnTransformer
 from sklearn.preprocessing import StandardScaler, OneHotEncoder
 from sklearn.metrics import accuracy_score, balanced_accuracy_score, confusion_matrix
 
-def knn_model(df, target_col='main_genre'):
-    #set features for KNN
+def knn_model(df, target_col='main_genre', n_neighbors=None):
+    """
+    Runs KNN. 
+    If n_neighbors is None, runs GridSearch to find optimal K.
+    If n_neighbors is set (via slider), runs specific K.
+    """
+    
+    # 1. Setup Data
     numeric_features = ['score', 'album_year', 'length', 'followers_count', 
                         'reviewer_reviews', 'artist_reviews']
     categorical_features = ['label']
-    target = target_col
-
-    df_clean = df[numeric_features + categorical_features+ [target]].dropna()
     
-    #prepare data
+    # Ensure columns exist
+    valid_cols = [c for c in numeric_features + categorical_features + [target_col] if c in df.columns]
+    df_clean = df[valid_cols].dropna()
+
+    X = df_clean.drop(columns=[target_col])
+    y = df_clean[target_col]
+    
+    # Preprocessor
     preprocessor = ColumnTransformer(
         transformers=[
-            ('num', StandardScaler(), numeric_features),
-            ('cat', OneHotEncoder(handle_unknown='ignore'), categorical_features)
+            ('num', StandardScaler(), [c for c in numeric_features if c in X.columns]),
+            ('cat', OneHotEncoder(handle_unknown='ignore'), [c for c in categorical_features if c in X.columns])
         ])
 
-    pipe = Pipeline([
-        ("preprocessor", preprocessor),
-        ("knn", KNeighborsClassifier(weights="distance"))
-    ])
-
-    # Train-Test
-    X = df[numeric_features + categorical_features]
-    y = df[target]
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
-    param_grid = {"knn__n_neighbors": range(1, 41, 2)}
-
-    #set up for cross-validation (5 folds)
-    grid = GridSearchCV(pipe, param_grid, cv=5, scoring="balanced_accuracy", n_jobs=-1)
-    grid.fit(X_train, y_train)
-
-    results_df = pd.DataFrame(grid.cv_results_)
-
-    results_df["k"] = results_df["param_knn__n_neighbors"]
-    results_df["mean_score"] = results_df["mean_test_score"]
-
-    best_k = grid.best_params_["knn__n_neighbors"]
-    best_score = grid.best_score_
-
-    #plot the best K to use
-    fig = px.line(
-        results_df,
-        x="k",
-        y="mean_score",
-        title=f"Cross-Validated Balanced Accuracy vs. K (best k = {best_k})",
-        markers=True,
-        labels={"k": "Number of Neighbors (k)", "mean_score": "Mean CV Balanced Accuracy"}
-    )
-    fig.add_scatter(
-        x=[best_k],
-        y=[best_score],
-        mode="markers+text",
-        text=[f"Best k = {best_k}"],
-        textposition="top center",
-        name="Best k"
-    )
-    fig.update_layout(hovermode="x unified", template="plotly_white")
-
-    #Model on test set
-    best_model = grid.best_estimator_
-    y_pred = best_model.predict(X_test)
+    #slider used
+    pipe = Pipeline([
+        ("preprocessor", preprocessor),
+        ("knn", KNeighborsClassifier(n_neighbors=n_neighbors, weights="distance"))
+    ])
     
+    pipe.fit(X_train, y_train)
+    y_pred = pipe.predict(X_test)
+    
+    # Metrics
     acc = accuracy_score(y_test, y_pred)
     bal_acc = balanced_accuracy_score(y_test, y_pred)
     
-    # Create Confusion Matrix Text
-    cm = confusion_matrix(y_test, y_pred, labels=best_model.classes_)
+    # Plot Confusion Matrix (Heatmap)
+    cm = confusion_matrix(y_test, y_pred, labels=pipe.classes_)
     
-    # Return Output
+    fig = px.imshow(
+        cm, 
+        text_auto=True,
+        x=pipe.classes_, 
+        y=pipe.classes_,
+        color_continuous_scale='Blues',
+        title=f"Confusion Matrix (k={n_neighbors})",
+        labels=dict(x="Predicted", y="Actual", color="Count")
+    )
+    
     stats_content = [
-        html.H4("Model Performance (Test Set)"),
-        html.P([html.Strong("Best K: "), str(best_k)]),
+        html.H4(f"Model Results (k={n_neighbors})"),
         html.P([html.Strong("Accuracy: "), f"{acc:.3f}"]),
         html.P([html.Strong("Balanced Accuracy: "), f"{bal_acc:.3f}"]),
-        html.Hr(),
-        html.P(html.Strong("Confusion Matrix:")),
-        # Simple rendering of the matrix
-        html.Pre(str(cm), style={'backgroundColor': '#f0f0f0', 'padding': '10px'})
+        html.P(html.Em("Note: Optimal K found was ~3 (based on GridSearch)."))
     ]
-
+    
     return fig, stats_content

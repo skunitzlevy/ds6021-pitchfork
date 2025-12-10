@@ -4,7 +4,7 @@ from summary_charts import summary_charts
 from pca_model import run_pca
 import os
 
-df = pd.read_csv('Cleaned_Data.csv')
+df = pd.read_csv('../data/clean/Cleaned_Data.csv')
 
 app = Dash(__name__)
 server = app.server

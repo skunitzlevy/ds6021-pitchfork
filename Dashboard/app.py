@@ -1,7 +1,9 @@
 import pandas as pd
+import numpy as np
 from dash import Dash, html, dcc, Input, Output, dash_table
 from summary_charts import summary_charts
 from pca_model import run_pca
+from linreg import run_linear_regression 
 import os
 
 df = pd.read_csv('../data/clean/Cleaned_Data.csv')
@@ -123,6 +125,35 @@ app.layout = html.Div(style={'fontFamily': 'Arial, sans-serif', 'backgroundColor
                 html.Div(id='model-output', children=[
                     html.P("Model outputs will appear here.")
                 ], style={'marginTop': '30px'})
+            ]), 
+
+            html.Div(style=card_style, children=[
+                html.H3("Linear Regression"),
+                html.P("Toggle variables below to predict the Pitchfork Score.", style={'marginBottom': '15px'}),
+                
+                html.Div([
+                    html.Label(html.Strong("Select Independent Variables (X):")),
+                    dcc.Checklist(
+                        id='lr-feature-checklist',
+                        options=[{'label': col, 'value': col} for col in df.select_dtypes(include=[np.number]).columns if col != 'score'],
+                        value=[col for col in df.select_dtypes(include=[np.number]).columns if col != 'score'][:2], 
+                        inline=True,
+                        style={'fontSize': '16px', 'marginTop': '10px'}
+                    ),
+                ], style={'padding': '15px', 'backgroundColor': '#f9f9f9', 'marginBottom': '20px', 'borderRadius': '5px'}),
+
+                html.Div([
+                    # Graph Section
+                    html.Div([
+                        dcc.Graph(id='lr-graph')
+                    ], style={'width': '65%', 'display': 'inline-block', 'verticalAlign': 'top'}),
+                    
+                    # Stats Section
+                    html.Div([
+                        html.H4("Model Statistics"),
+                        html.Div(id='lr-stats', style={'whiteSpace': 'pre-line', 'fontSize': '15px'})
+                    ], style={'width': '30%', 'display': 'inline-block', 'paddingLeft': '20px', 'verticalAlign': 'top'})
+                ])
             ])
         ]),
 
@@ -150,10 +181,6 @@ app.layout = html.Div(style={'fontFamily': 'Arial, sans-serif', 'backgroundColor
 )
 def update_table_rows(selected_rows):
     return df.head(selected_rows).to_dict('records'), selected_rows
-
-from summary_charts import summary_charts
-
-from summary_charts import summary_charts
 
 @app.callback(
     Output("followers_vs_score_by_artist", "figure"),
@@ -186,6 +213,16 @@ def update_pca(_):
     figs = run_pca(df)
     loadings_df = figs["loadings"].reset_index().rename(columns={"index":"Feature"})
     return figs["scree"], figs["cumulative"], figs["scatter"], loadings_df.to_dict("records")
+
+# Linear Regression Callback
+@app.callback(
+    [Output('lr-graph', 'figure'),
+     Output('lr-stats', 'children')],
+    [Input('lr-feature-checklist', 'value')]
+)
+def update_lr_graph(selected_features):
+    fig, stats = run_linear_regression(df, selected_features)
+    return fig, stats
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 8050))

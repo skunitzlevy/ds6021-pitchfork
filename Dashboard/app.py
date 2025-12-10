@@ -12,6 +12,7 @@ df['log_followers_count'] = np.log(df['followers_count'])
 df['log_length'] = np.log(df['length'])
 df['sqrt_followers_count'] = np.sqrt(df['followers_count'])
 df['sqrt_length'] = np.sqrt(df['length'])
+df['sqrt_score'] = np.sqrt(df['score'])
 
 app = Dash(__name__)
 server = app.server
@@ -140,7 +141,7 @@ app.layout = html.Div(style={'fontFamily': 'Arial, sans-serif', 'backgroundColor
                     html.Label(html.Strong("Select Independent Variables (X):")),
                     dcc.Checklist(
                         id='lr-feature-checklist',
-                        options=[{'label': col, 'value': col} for col in df.select_dtypes(include=[np.number]).columns if col != 'score'],
+                        options=[{'label': col, 'value': col} for col in df.select_dtypes(include=[np.number]).columns if col not in ['score','sqrt_score']],
                         value=[col for col in df.select_dtypes(include=[np.number]).columns if col != 'score'][:2], 
                         inline=True,
                         style={'fontSize': '16px', 'marginTop': '10px'}

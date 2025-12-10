@@ -6,7 +6,7 @@ import numpy as np
 from dash import Dash, html, dcc, Input, Output, dash_table
 
 def run_linear_regression(df, selected_features):
-    '''
+    
     # 1. Handle Empty Selection
     if not selected_features:
         empty_fig = go.Figure()
@@ -15,7 +15,7 @@ def run_linear_regression(df, selected_features):
             xaxis={'visible': False}, yaxis={'visible': False}
         )
         return empty_fig, "No variables selected."
-    '''
+    
 
     target_col = 'score' 
     temp_df = df[selected_features + [target_col]]

@@ -4,6 +4,7 @@ from dash import Dash, html, dcc, Input, Output, dash_table
 from summary_charts import summary_charts
 from pca_model import run_pca
 from linreg import run_linear_regression 
+from KNN import knn_model
 import os
 
 df = pd.read_csv('../data/clean/Cleaned_Data.csv')
@@ -154,6 +155,23 @@ app.layout = html.Div(style={'fontFamily': 'Arial, sans-serif', 'backgroundColor
                         html.Div(id='lr-stats', style={'whiteSpace': 'pre-line', 'fontSize': '15px'})
                     ], style={'width': '30%', 'display': 'inline-block', 'paddingLeft': '20px', 'verticalAlign': 'top'})
                 ])
+            ]),
+
+            html.Div(style=card_style, children=[
+                html.H3("K-Nearest Neighbors Classifier"),
+                html.P("Train a KNN model to classify the target (e.g., Genre) based on audio features.", style={'marginBottom': '15px'}),
+                
+                dcc.Loading(id="loading-knn", type="default", children=[
+                    html.Div([
+                        # Graph Section
+                        html.Div([
+                            dcc.Graph(id='knn-graph')
+                        ], style={'width': '65%', 'display': 'inline-block', 'verticalAlign': 'top', 'marginTop': '20px'}),
+                        
+                        # Stats Section
+                        html.Div(id='knn-stats', style={'width': '30%', 'display': 'inline-block', 'paddingLeft': '20px', 'verticalAlign': 'top', 'marginTop': '20px'})
+                    ])
+                ])
             ])
         ]),
 
@@ -223,6 +241,15 @@ def update_pca(_):
 def update_lr_graph(selected_features):
     fig, stats = run_linear_regression(df, selected_features)
     return fig, stats
+
+# KNN Callback
+@app.callback(
+    [Output('knn-graph', 'figure'),
+     Output('knn-stats', 'children')],
+     [Input('dummy-eda-trigger', 'children')]
+)
+def update_knn_model(_):
+    return knn_model(df, target_col='genre')
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 8050))

@@ -6,8 +6,20 @@ from pca_model import run_pca
 from linreg import run_linear_regression 
 from KNN import knn_model
 import os
+from spline import run_spline_regression
+from elastic import run_elastic_net
 
 df = pd.read_csv('../data/clean/Cleaned_Data.csv')
+#add log transformations
+df['log_followers_count'] = np.log(df['followers_count']+1)
+df['log_length'] = np.log(df['length']+1)
+df['log_review_release_difference'] = np.log(df['review_release_difference']+1)
+
+#add square and square root transformations
+df['sqrt_followers_count'] = np.sqrt(df['followers_count'])
+df['sqrt_length'] = np.sqrt(df['length'])
+df['sqrt_score'] = np.sqrt(df['score'])
+df['sq_length'] = np.square(df['length'])
 
 app = Dash(__name__)
 server = app.server
@@ -128,6 +140,52 @@ app.layout = html.Div(style={'fontFamily': 'Arial, sans-serif', 'backgroundColor
                 ], style={'marginTop': '30px'})
             ]), 
 
+            #Elastic Net
+            html.Div(style=card_style, children=[
+                html.H3("Elastic Net Regression"),
+                html.P("Linear regression with combined L1 (Lasso) and L2 (Ridge) regularization."),
+                
+                html.Div([
+                    html.Label(html.Strong("Select Independent Variables (X):")),
+                    dcc.Checklist(
+                        id='elastic-feature-checklist',
+                        options=[{'label': col, 'value': col} for col in df.select_dtypes(include=[np.number]).columns if col not in ['score', 'sqrt_score']],
+                        value=[col for col in df.select_dtypes(include=[np.number]).columns if col not in ['score', 'sqrt_score', 'sq_length']],
+                        inline=True,
+                        style={'fontSize': '16px', 'marginTop': '10px'}
+                    ),
+                    
+                    # Alpha Slider
+                    html.Label("Alpha (Regularization Strength):", style={'marginTop': '20px', 'fontWeight': 'bold'}),
+                    html.P("Set to 0 to auto-optimize Alpha.", style={'fontSize': '12px', 'color': 'gray'}),
+                    dcc.Slider(
+                        id='elastic-alpha-slider',
+                        min=0, max=5, step=0.1, value=0,
+                        marks={0: {'label': 'Auto', 'style': {'color': 'blue'}}, 1: '1', 2: '2', 5: '5'},
+                        tooltip={"placement": "bottom", "always_visible": True}
+                    ),
+
+                    # L1 Ratio Slider
+                    html.Label("L1 Ratio (Mix of Lasso/Ridge):", style={'marginTop': '20px', 'fontWeight': 'bold'}),
+                    html.P("0 = Ridge, 1 = Lasso. (Ignored if Alpha is Auto)", style={'fontSize': '12px', 'color': 'gray'}),
+                    dcc.Slider(
+                        id='elastic-l1-slider',
+                        min=0, max=1, step=0.1, value=0.5,
+                        marks={0: 'Ridge', 0.5: 'Mix', 1: 'Lasso'},
+                        tooltip={"placement": "bottom", "always_visible": True}
+                    )
+                ], style={'padding': '15px', 'backgroundColor': '#f9f9f9', 'marginBottom': '20px'}),
+
+                dcc.Loading(children=[
+                    html.Div([
+                        html.Div([dcc.Graph(id='elastic-graph')], style={'width': '65%', 'display': 'inline-block', 'verticalAlign': 'top'}),
+                        html.Div([html.H4("Elastic Net Statistics"), html.Div(id='elastic-stats', style={'whiteSpace': 'pre-line'})], 
+                                 style={'width': '30%', 'display': 'inline-block', 'paddingLeft': '20px', 'verticalAlign': 'top'})
+                    ])
+                ])
+            ]),
+
+            # Linear Reg
             html.Div(style=card_style, children=[
                 html.H3("Linear Regression"),
                 html.P("Toggle variables below to predict the Pitchfork Score.", style={'marginBottom': '15px'}),
@@ -136,8 +194,8 @@ app.layout = html.Div(style={'fontFamily': 'Arial, sans-serif', 'backgroundColor
                     html.Label(html.Strong("Select Independent Variables (X):")),
                     dcc.Checklist(
                         id='lr-feature-checklist',
-                        options=[{'label': col, 'value': col} for col in df.select_dtypes(include=[np.number]).columns if col != 'score'],
-                        value=[col for col in df.select_dtypes(include=[np.number]).columns if col != 'score'][:2], 
+                        options=[{'label': col, 'value': col} for col in df.select_dtypes(include=[np.number]).columns if col not in ['score','sqrt_score']],
+                        value=['log_length', 'log_followers_count', 'log_review_release_difference'],
                         inline=True,
                         style={'fontSize': '16px', 'marginTop': '10px'}
                     ),
@@ -157,18 +215,73 @@ app.layout = html.Div(style={'fontFamily': 'Arial, sans-serif', 'backgroundColor
                 ])
             ]),
 
+            # Spline reg
+            html.Div(style=card_style, children=[
+                html.H3("Spline Regression (Multi-Variable)"),
+                html.P("Fits a spline model"),
+                
+                html.Div([
+                    html.Label(html.Strong("Select Independent Variables (X):")),
+                    dcc.Checklist(
+                        id='spline-feature-checklist',
+                        options=[
+                            {'label': col, 'value': col} 
+                            for col in df.select_dtypes(include=[np.number]).columns 
+                            if col not in ['score', 'sqrt_score']
+                        ],
+                        value=['log_length', 'log_followers_count', 'log_review_release_difference'],
+                        inline=True,
+                        style={'fontSize': '16px', 'marginTop': '10px'}
+                    ),
+                    
+                    html.Label("Knot Location (Quantile):", style={'marginTop': '20px', 'fontWeight': 'bold'}),
+                    dcc.Slider(
+                        id='spline-knot-slider',
+                        min=0.1,
+                        max=0.9,
+                        step=0.1,
+                        value=0.5,
+                        marks={0.1: '10%', 0.5: 'Median', 0.9: '90%'},
+                        tooltip={"placement": "bottom", "always_visible": True}
+                    )
+                ], style={'padding': '15px', 'backgroundColor': '#f9f9f9', 'marginBottom': '20px', 'borderRadius': '5px'}),
+
+                html.Div([
+                    html.Div([dcc.Graph(id='spline-graph')], style={'width': '65%', 'display': 'inline-block', 'verticalAlign': 'top'}),
+                    html.Div([
+                        html.H4("Spline Statistics"),
+                        html.Div(id='spline-stats', style={'whiteSpace': 'pre-line', 'fontSize': '15px'})
+                    ], style={'width': '30%', 'display': 'inline-block', 'paddingLeft': '20px', 'verticalAlign': 'top'})
+                ])
+            ]),
+
+            # KNN
             html.Div(style=card_style, children=[
                 html.H3("K-Nearest Neighbors Classifier"),
-                html.P("Train a KNN model to classify the target (e.g., Genre) based on audio features.", style={'marginBottom': '15px'}),
+                html.P("Classify 'Main Genre' based on audio features."),
                 
+                html.Div([
+                    html.Label(html.Strong("Number of Neighbors (k):")),
+                    html.P("Slider disabled? Set to 0 to run auto-optimization.", style={'fontSize': '12px', 'color': 'gray'}),
+                    dcc.Slider(
+                        id='knn-k-slider',
+                        min=1,
+                        max=20,
+                        step=1,
+                        value=3,
+                        marks={
+                            0: {'label': 'Auto', 'style': {'color': 'blue', 'fontWeight': 'bold'}},
+                            3: {'label': '3 (Opt)', 'style': {'color': 'green'}},
+                            10: '10',
+                            20: '20'
+                        },
+                        tooltip={"placement": "bottom", "always_visible": True}
+                    )
+                ], style={'padding': '15px', 'marginBottom': '20px'}),
+
                 dcc.Loading(id="loading-knn", type="default", children=[
                     html.Div([
-                        # Graph Section
-                        html.Div([
-                            dcc.Graph(id='knn-graph')
-                        ], style={'width': '65%', 'display': 'inline-block', 'verticalAlign': 'top', 'marginTop': '20px'}),
-                        
-                        # Stats Section
+                        html.Div([dcc.Graph(id='knn-graph')], style={'width': '65%', 'display': 'inline-block', 'verticalAlign': 'top'}),
                         html.Div(id='knn-stats', style={'width': '30%', 'display': 'inline-block', 'paddingLeft': '20px', 'verticalAlign': 'top', 'marginTop': '20px'})
                     ])
                 ])
@@ -232,6 +345,17 @@ def update_pca(_):
     loadings_df = figs["loadings"].reset_index().rename(columns={"index":"Feature"})
     return figs["scree"], figs["cumulative"], figs["scatter"], loadings_df.to_dict("records")
 
+# Elastic Net Callback
+@app.callback(
+    [Output('elastic-graph', 'figure'),
+     Output('elastic-stats', 'children')],
+    [Input('elastic-feature-checklist', 'value'),
+     Input('elastic-alpha-slider', 'value'),
+     Input('elastic-l1-slider', 'value')]
+)
+def update_elastic_graph(selected_features, alpha, l1_ratio):
+    return run_elastic_net(df, selected_features, alpha_val=alpha, l1_ratio_val=l1_ratio)
+
 # Linear Regression Callback
 @app.callback(
     [Output('lr-graph', 'figure'),
@@ -242,14 +366,26 @@ def update_lr_graph(selected_features):
     fig, stats = run_linear_regression(df, selected_features)
     return fig, stats
 
+# Spline Regression Callback
+@app.callback(
+    [Output('spline-graph', 'figure'),
+     Output('spline-stats', 'children')],
+    [Input('spline-feature-checklist', 'value'), # Input is now the checklist
+     Input('spline-knot-slider', 'value')]
+)
+def update_spline_graph(selected_features, knot_quantile):
+    return run_spline_regression(df, selected_features, knot_quantile)
+
 # KNN Callback
 @app.callback(
     [Output('knn-graph', 'figure'),
      Output('knn-stats', 'children')],
-     [Input('dummy-eda-trigger', 'children')]
+     [Input('knn-k-slider', 'value')] # Add slider input
 )
-def update_knn_model(_):
-    return knn_model(df, target_col='genre')
+def update_knn_model(k_value):
+    # If slider is 0, pass None to trigger the "Optimizer" mode
+    k = k_value if k_value > 0 else None
+    return knn_model(df, target_col='main_genre', n_neighbors=k)
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 8050))

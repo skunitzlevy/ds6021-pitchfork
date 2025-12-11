@@ -61,7 +61,6 @@ ds6021-pitchfork/
 ├── notebooks/             # Exploratory analysis notebooks
 ├── Visualizations/        # Static visualization outputs
 ├── models.ipynb           # Comprehensive modeling notebook
-├── kmeans.ipynb           # K-Means analysis
 └── requirements.txt       # Python dependencies
 ```
 
@@ -136,6 +135,9 @@ The interactive dashboard provides real-time model exploration and parameter tun
 ## Usage
 
 ### Dashboard
+
+**https://ds6021-pitchfork.onrender.com/**
+
 The Dash application allows you to:
 - Explore different model types
 - Adjust hyperparameters

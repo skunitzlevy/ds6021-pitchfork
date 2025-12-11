@@ -11,9 +11,9 @@ from elastic import run_elastic_net
 from kmeans import cluster_and_plot_latent
 import plotly.graph_objects as go
 
-df = pd.read_csv('../data/clean/Cleaned_Data.csv')
+df = pd.read_csv('./data/clean/Cleaned_Data.csv')
 
-with open("../README.md", "r", encoding="utf-8") as f:
+with open("./README.md", "r", encoding="utf-8") as f:
     readme_text = f.read()
 
 df['log_followers_count'] = np.log(df['followers_count']+1)
@@ -250,7 +250,7 @@ app.layout = html.Div(style={'fontFamily': 'Arial, sans-serif', 'backgroundColor
 
         dcc.Tab(label="Unsupervised Models", children=[
             html.Div(style=card_style, children=[
-                html.H3("Principal Component Analysis"),
+                html.H3("Select Model:"),
                 dcc.RadioItems(
                     id="pca_kmeans_toggle",
                     options=[

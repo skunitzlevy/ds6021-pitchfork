@@ -13,9 +13,9 @@ import plotly.graph_objects as go
 
 
 
-df = pd.read_csv('./data/clean/Cleaned_Data.csv')
+df = pd.read_csv('../data/clean/Cleaned_Data.csv')
 
-with open("README.md", "r", encoding="utf-8") as f:
+with open("../README.md", "r", encoding="utf-8") as f:
     readme_text = f.read()
 
 df['log_followers_count'] = np.log(df['followers_count']+1)

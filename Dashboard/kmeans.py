@@ -58,7 +58,7 @@ def cluster_and_plot_latent(df, numeric_cols, categorical_cols,
         x='Latent Feature 1', 
         y='Latent Feature 2', 
         color='Cluster',
-        title=f'K-Means Clusters on Latent Features (PCA) - {explained_variance:.1f}% Variance Captured',
+        title=f'K-Means Clusters on Latent Features (PCA)',
         labels={'Cluster': 'Cluster Label'},
         hover_data=['True Genre', 'reviewer_reviews', 'score', 'log_length'] 
     )

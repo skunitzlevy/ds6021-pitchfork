@@ -150,7 +150,7 @@ The Dash application allows you to:
 
 ## References
 
-- [University of Virginia, School of Data Science (Biased Music Reviews Give AI an Edge in Genre Prediction)](https://datascience.virginia.edu/news/biased-music-reviews-give-ai-edge-genre-prediction)
-- [@uvadatascience - Happy Spotify Wrapped Day Instagram Reel](https://www.instagram.com/reel/DRzo9G3kTYQ/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA%3D%3D)
 - [Pitchfork](https://pitchfork.com/)
 - [Spotify Web API Documentation](https://developer.spotify.com/documentation/web-api/)
+- [University of Virginia, School of Data Science (Biased Music Reviews Give AI an Edge in Genre Prediction)](https://datascience.virginia.edu/news/biased-music-reviews-give-ai-edge-genre-prediction)
+- [@uvadatascience - Happy Spotify Wrapped Day Instagram Reel](https://www.instagram.com/reel/DRzo9G3kTYQ/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA%3D%3D)

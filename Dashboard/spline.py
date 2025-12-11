@@ -29,8 +29,8 @@ def run_spline_regression(df, selected_features, knot_quantile=0.5):
     for col in selected_features:
         x_val = data[col].values
         knot = np.quantile(x_val, knot_quantile)
-        X_expanded_list.append(x_val.reshape(-1, 1))           # Base term
-        X_expanded_list.append(np.maximum(0, x_val - knot).reshape(-1, 1)) # Spline term
+        X_expanded_list.append(x_val.reshape(-1, 1))
+        X_expanded_list.append(np.maximum(0, x_val - knot).reshape(-1, 1))
 
     X_final = np.hstack(X_expanded_list)
 
@@ -39,7 +39,7 @@ def run_spline_regression(df, selected_features, knot_quantile=0.5):
     model.fit(X_final, y)
     y_pred = model.predict(X_final)
 
-    # 4. Calculate Stats (Unified Format)
+    # 4. Calculate Stats
     r2 = r2_score(y, y_pred)
     rmse = np.sqrt(mean_squared_error(y, y_pred))
     

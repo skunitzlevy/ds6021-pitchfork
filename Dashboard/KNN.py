@@ -22,14 +22,12 @@ def knn_model(df, target_col='main_genre', n_neighbors=None):
                         'reviewer_reviews', 'artist_reviews']
     categorical_features = ['label']
     
-    # Ensure columns exist
     valid_cols = [c for c in numeric_features + categorical_features + [target_col] if c in df.columns]
     df_clean = df[valid_cols].dropna()
 
     X = df_clean.drop(columns=[target_col])
     y = df_clean[target_col]
     
-    # Preprocessor
     preprocessor = ColumnTransformer(
         transformers=[
             ('num', StandardScaler(), [c for c in numeric_features if c in X.columns]),
@@ -38,7 +36,7 @@ def knn_model(df, target_col='main_genre', n_neighbors=None):
 
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
-    #slider used
+    # Slider used
     pipe = Pipeline([
         ("preprocessor", preprocessor),
         ("knn", KNeighborsClassifier(n_neighbors=n_neighbors, weights="distance"))
@@ -51,7 +49,7 @@ def knn_model(df, target_col='main_genre', n_neighbors=None):
     acc = accuracy_score(y_test, y_pred)
     bal_acc = balanced_accuracy_score(y_test, y_pred)
     
-    # Plot Confusion Matrix (Heatmap)
+    # Plot Confusion Matrix
     cm = confusion_matrix(y_test, y_pred, labels=pipe.classes_)
     
     fig = px.imshow(

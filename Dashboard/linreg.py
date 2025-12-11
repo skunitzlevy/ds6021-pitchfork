@@ -40,16 +40,15 @@ def run_linear_regression(df, selected_features, degree=1):
     except Exception as e:
         return go.Figure(), f"Model Error: {str(e)}"
     
-    # 4. Calculate Stats (Unified Format)
+    # 4. Calculate Stats
     r2 = r2_score(y, y_pred)
-    rmse = np.sqrt(mean_squared_error(y, y_pred)) # RMSE instead of MSE
+    rmse = np.sqrt(mean_squared_error(y, y_pred))
     
     # Extract coefficients
     linear_step = model.named_steps['linearregression']
     intercept = linear_step.intercept_
     raw_coefs = linear_step.coef_
     
-    # Format coefficients nicely
     coef_str = ""
     if degree == 1:
         start_idx = 1 if len(raw_coefs) > len(selected_features) else 0

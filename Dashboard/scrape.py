@@ -1,4 +1,3 @@
-# Import libraries
 import json
 import time
 from datetime import datetime
@@ -143,7 +142,7 @@ def main():
                     rows.append(data)
                 except Exception as e:
                     failures.append({"url": url, "reason": f"parse_error: {e}"})
-                # polite tiny pause to reduce load (tune as needed)
+                # polite tiny pause to reduce load
                 if i % 25 == 0:
                     time.sleep(0.5)
 

@@ -14,12 +14,10 @@ import plotly.graph_objects as go
 
 
 df = pd.read_csv('./data/clean/Cleaned_Data.csv')
-#add log transformations
 df['log_followers_count'] = np.log(df['followers_count']+1)
 df['log_length'] = np.log(df['length']+1)
 df['log_review_release_difference'] = np.log(df['review_release_difference']+1)
 
-#add square and square root transformations
 df['sqrt_followers_count'] = np.sqrt(df['followers_count'])
 df['sqrt_length'] = np.sqrt(df['length'])
 df['sqrt_score'] = np.sqrt(df['score'])
@@ -97,7 +95,7 @@ app.layout = html.Div(style={'fontFamily': 'Arial, sans-serif', 'backgroundColor
             ])
         ]),
 
-        # Models Tab
+        # Supervised Models Tab
         dcc.Tab(label="Supervised Models", children=[
 
             #Elastic Net
@@ -145,7 +143,7 @@ app.layout = html.Div(style={'fontFamily': 'Arial, sans-serif', 'backgroundColor
                 ])
             ]),
 
-            # Linear Reg
+            # Linear Regression
             html.Div(style=card_style, children=[
                 html.H3("Linear Regression"),
                 html.P("Toggle variables below to predict the Pitchfork Score.", style={'marginBottom': '15px'}),
@@ -162,12 +160,10 @@ app.layout = html.Div(style={'fontFamily': 'Arial, sans-serif', 'backgroundColor
                 ], style={'padding': '15px', 'backgroundColor': '#f9f9f9', 'marginBottom': '20px', 'borderRadius': '5px'}),
 
                 html.Div([
-                    # Graph Section
                     html.Div([
                         dcc.Graph(id='lr-graph')
                     ], style={'width': '65%', 'display': 'inline-block', 'verticalAlign': 'top'}),
                     
-                    # Stats Section
                     html.Div([
                         html.H4("Model Statistics"),
                         html.Div(id='lr-stats', style={'whiteSpace': 'pre-line', 'fontSize': '15px'})
@@ -248,11 +244,10 @@ app.layout = html.Div(style={'fontFamily': 'Arial, sans-serif', 'backgroundColor
             ])
         ]),
 
-        # PCA Tab
+        # Unsupervised Models Tab
         dcc.Tab(label="Unsupervised Models", children=[
             html.Div(style=card_style, children=[
                 html.H3("Principal Component Analysis"),
-                # --- TOGGLE: PCA vs K-Means ---
                 dcc.RadioItems(
                     id="pca_kmeans_toggle",
                     options=[
@@ -265,7 +260,7 @@ app.layout = html.Div(style={'fontFamily': 'Arial, sans-serif', 'backgroundColor
                 ),
                 html.Div(
                     id="kmeans_slider_container",
-                    style={"marginBottom": "20px"},  # default style; we'll toggle display
+                    style={"marginBottom": "20px"},
                     children=[
                         html.Label("Select Number of Clusters (K) for K-Means:"),
                         dcc.Slider(
@@ -337,7 +332,7 @@ def update_eda(_):
     Output("pca_cumulative_plot", "style"),
     Output("pca_scatter_plot", "style"),
     Output("pca_table_container", "style"),
-    Output("kmeans_slider_container", "style"),  # <-- new output
+    Output("kmeans_slider_container", "style"),
     Input("pca_kmeans_toggle", "value"),
     Input("kmeans-k-slider", "value")
 )
@@ -350,11 +345,11 @@ def update_pca_or_kmeans(selected_method, k_value):
             figs["cumulative"], 
             figs["scatter"], 
             loadings_df.to_dict("records"),
-            {"display": "block"},   # show scree
-            {"display": "block"},   # show cumulative
-            {"display": "block"},   # show scatter
-            {"display": "block"},   # show table
-            {"display": "none"}     # hide slider for PCA
+            {"display": "block"},
+            {"display": "block"},
+            {"display": "block"},
+            {"display": "block"},
+            {"display": "none"}
         )
     else:
         numeric_cols = ["score", "log_length", "log_followers_count"]
@@ -363,15 +358,15 @@ def update_pca_or_kmeans(selected_method, k_value):
             df, numeric_cols, categorical_cols, n_clusters=k_value
         )
         return (
-            go.Figure(),             # empty scree
-            go.Figure(),             # empty cumulative
-            kmeans_fig,              # KMeans scatter
-            [],                      # empty table
-            {"display": "none"},     # hide scree
-            {"display": "none"},     # hide cumulative
-            {"display": "block"},    # show KMeans scatter
-            {"display": "none"},     # hide table
-            {"display": "block"}     # show slider for K-Means
+            go.Figure(), 
+            go.Figure(), 
+            kmeans_fig, 
+            [], 
+            {"display": "none"},
+            {"display": "none"},
+            {"display": "block"},
+            {"display": "none"},  
+            {"display": "block"}
         )
 
 # Elastic Net Callback
@@ -399,7 +394,7 @@ def update_lr_graph(selected_features):
 @app.callback(
     [Output('spline-graph', 'figure'),
      Output('spline-stats', 'children')],
-    [Input('spline-feature-checklist', 'value'), # Input is now the checklist
+    [Input('spline-feature-checklist', 'value'),
      Input('spline-knot-slider', 'value')]
 )
 def update_spline_graph(selected_features, knot_quantile):
@@ -409,10 +404,9 @@ def update_spline_graph(selected_features, knot_quantile):
 @app.callback(
     [Output('knn-graph', 'figure'),
      Output('knn-stats', 'children')],
-     [Input('knn-k-slider', 'value')] # Add slider input
+     [Input('knn-k-slider', 'value')] 
 )
 def update_knn_model(k_value):
-    # If slider is 0, pass None to trigger the "Optimizer" mode
     k = k_value if k_value > 0 else None
     return knn_model(df, target_col='main_genre', n_neighbors=k)
 

@@ -47,8 +47,7 @@ def run_elastic_net(df, selected_features, alpha_val=0, l1_ratio_val=0.5):
 
     preprocessor = ColumnTransformer(transformers=transformers)
 
-    # 4. Find Optimal Parameters (Background Calculation)
-    # We always run this to show the user what the "Best" values are
+    # 4. Find Optimal Parameters
     try:
         l1_ratios_to_test = [0.1, 0.5, 0.7, 0.9, 0.95, 0.99, 1.0]
         cv_model = ElasticNetCV(l1_ratio=l1_ratios_to_test, cv=5, random_state=42, n_jobs=-1, max_iter=20000)
@@ -67,12 +66,10 @@ def run_elastic_net(df, selected_features, alpha_val=0, l1_ratio_val=0.5):
 
     # 5. Determine Active Parameters for Plotting
     if alpha_val == 0:
-        # Auto Mode: Use the optimal values found above
         active_alpha = optimal_alpha
         active_l1 = optimal_l1
         mode_label = "Automatic (Optimal)"
     else:
-        # Manual Mode: Use slider values
         active_alpha = alpha_val
         active_l1 = l1_ratio_val
         mode_label = "Manual Settings"

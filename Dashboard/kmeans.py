@@ -18,7 +18,6 @@ def cluster_and_plot_latent(df, numeric_cols, categorical_cols,
     X = df[features].copy()
     true_labels = df[true_label_col]
 
-    # Drop rows with any NaNs
     X = X.dropna()
     true_labels = true_labels.loc[X.index]
 
@@ -34,12 +33,11 @@ def cluster_and_plot_latent(df, numeric_cols, categorical_cols,
     kmeans = KMeans(n_clusters=n_clusters, random_state=42)
     cluster_labels = kmeans.fit_predict(X_processed)
 
-    # --- NEW STEP: Dimensionality Reduction (PCA) ---
+    # Dimensionality Reduction (PCA)
     # Compress the processed data into 2 latent features
     pca = PCA(n_components=2)
     latent_components = pca.fit_transform(X_processed)
     
-    # Calculate how much info these 2 features capture
     explained_variance = pca.explained_variance_ratio_.sum() * 100
 
     # 3. Setup Plot Data
@@ -47,11 +45,9 @@ def cluster_and_plot_latent(df, numeric_cols, categorical_cols,
     plot_df['True Genre'] = true_labels.reset_index(drop=True)
     plot_df['Cluster'] = cluster_labels.astype(str)
     
-    # Add the new latent features to the dataframe
     plot_df['Latent Feature 1'] = latent_components[:, 0]
     plot_df['Latent Feature 2'] = latent_components[:, 1]
     
-    # Add hover data if available
     for col in ['reviewer_reviews']:
         if col not in plot_df.columns and col in df.columns:
             plot_df[col] = df[col].reset_index(drop=True)

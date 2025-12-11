@@ -5,13 +5,6 @@ import plotly.graph_objects as go
 from typing import Dict
 
 def summary_charts(df: pd.DataFrame) -> Dict[str, object]:
-    """
-    Charts:
-    - followers_vs_score_by_artist
-    - score_vs_length
-    - pitchfork_score_distribution
-    - pitchfork_review_counts
-    """
 
     figs = {}
 
@@ -118,10 +111,7 @@ def summary_charts(df: pd.DataFrame) -> Dict[str, object]:
     figs['pitchfork_review_counts'] = pitchfork_review_counts
 
     # Chart: genre_score_boxplot
-    #clean_df = pd.read_csv("out/pitchfork_reviews_clean_MAO.csv")
-
     temp = df.copy()
-    #temp["main_genre"] = clean_df["main_genre"]
 
     valid_genres = (
         temp["main_genre"]

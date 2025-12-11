@@ -14,6 +14,10 @@ import plotly.graph_objects as go
 
 
 df = pd.read_csv('./data/clean/Cleaned_Data.csv')
+
+with open("README.md", "r", encoding="utf-8") as f:
+    readme_text = f.read()
+
 df['log_followers_count'] = np.log(df['followers_count']+1)
 df['log_length'] = np.log(df['length']+1)
 df['log_review_release_difference'] = np.log(df['review_release_difference']+1)
@@ -46,8 +50,7 @@ app.layout = html.Div(style={'fontFamily': 'Arial, sans-serif', 'backgroundColor
         # README Tab
         dcc.Tab(label="README", children=[
             html.Div(style=card_style, children=[
-                html.H3("Project README"),
-                html.P("This is a placeholder for README content. Describe your project here, your team, dataset, and objectives."),
+                dcc.Markdown(readme_text, link_target="_blank")
             ])
         ]),
 

@@ -21,7 +21,7 @@ Our project analyzed Pitchfork music reviews to understand what factors influenc
 - Fields: artist, album, score (0-10), genre, label, reviewer, publication date, release year
 
 ### Spotify API
-- ~5,100 unique artists matched to Pitchfork reviews
+- ~5,200 unique artists matched to Pitchfork reviews
 - Artist follower counts
 - Track information
 - Used to enrich Pitchfork data with popularity metrics

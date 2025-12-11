@@ -7,16 +7,19 @@ from sklearn.pipeline import Pipeline
 from sklearn.compose import ColumnTransformer
 from sklearn.preprocessing import StandardScaler, OneHotEncoder
 from sklearn.metrics import mean_squared_error, r2_score
+from sklearn.exceptions import ConvergenceWarning
+import warnings
 
-def run_elastic_net(df, selected_features, alpha_val=0, l1_ratio_val=0.5):
+def run_elastic_net(df, selected_features, alpha_val=None, l1_ratio_val=0.5):
     target = 'score'
     
     # 1. Validation
-    if not selected_features or len(selected_features) == 0:
+    if not selected_features:
         fig = go.Figure()
         fig.update_layout(
             xaxis={'visible': False}, yaxis={'visible': False},
-            annotations=[{"text": "Please select at least one variable.", "xref": "paper", "yref": "paper", "showarrow": False, "font": {"size": 20}}]
+            annotations=[{"text": "Please select at least one variable.", "xref": "paper", 
+                          "yref": "paper", "showarrow": False, "font": {"size": 20}}]
         )
         return fig, "No features selected."
 
@@ -28,7 +31,6 @@ def run_elastic_net(df, selected_features, alpha_val=0, l1_ratio_val=0.5):
 
     data.replace([np.inf, -np.inf], np.nan, inplace=True)
     data.dropna(inplace=True)
-
     if data.empty:
         return go.Figure(), "Error: No valid data points remain."
 
@@ -43,85 +45,85 @@ def run_elastic_net(df, selected_features, alpha_val=0, l1_ratio_val=0.5):
     if numeric_features:
         transformers.append(('num', StandardScaler(), numeric_features))
     if categorical_features:
-        transformers.append(('cat', OneHotEncoder(handle_unknown='ignore'), categorical_features))
+        transformers.append(('cat', OneHotEncoder(handle_unknown='ignore', sparse_output=False), categorical_features))
 
     preprocessor = ColumnTransformer(transformers=transformers)
 
-    # 4. Find Optimal Parameters
-    try:
-        l1_ratios_to_test = [0.1, 0.5, 0.7, 0.9, 0.95, 0.99, 1.0]
-        cv_model = ElasticNetCV(l1_ratio=l1_ratios_to_test, cv=5, random_state=42, n_jobs=-1, max_iter=20000)
-        
-        cv_pipe = Pipeline([
-            ('preprocessor', preprocessor),
-            ('regressor', cv_model)
-        ])
-        cv_pipe.fit(X, y)
-        
-        optimal_alpha = cv_pipe.named_steps['regressor'].alpha_
-        optimal_l1 = cv_pipe.named_steps['regressor'].l1_ratio_
-    except Exception as e:
-        optimal_alpha = 0
-        optimal_l1 = 0
-
-    # 5. Determine Active Parameters for Plotting
-    if alpha_val == 0:
-        active_alpha = optimal_alpha
-        active_l1 = optimal_l1
-        mode_label = "Automatic (Optimal)"
+    # 4. Determine alpha and l1_ratio
+    min_alpha = 1e-4  # slightly higher to improve convergence
+    if alpha_val is None or alpha_val <= 0:
+        try:
+            l1_ratios_to_test = [0.1, 0.5, 0.7, 0.9, 0.95, 0.99, 1.0]
+            cv_model = ElasticNetCV(
+                l1_ratio=l1_ratios_to_test,
+                cv=3,            # fewer folds for low memory/CPU
+                n_jobs=1,        # single-threaded
+                max_iter=10000,  # moderate iteration increase
+                eps=1e-3,
+                random_state=42
+            )
+            pipe_cv = Pipeline([
+                ('preprocessor', preprocessor),
+                ('regressor', cv_model)
+            ])
+            with warnings.catch_warnings():
+                warnings.filterwarnings("ignore", category=UserWarning)
+                pipe_cv.fit(X, y)
+            alpha_val = max(pipe_cv.named_steps['regressor'].alpha_, min_alpha)
+            l1_ratio_val = pipe_cv.named_steps['regressor'].l1_ratio_
+            mode_label = "Automatic (Optimal)"
+        except Exception:
+            alpha_val = min_alpha
+            l1_ratio_val = 0.5
+            mode_label = "Automatic (Fallback)"
     else:
-        active_alpha = alpha_val
-        active_l1 = l1_ratio_val
+        alpha_val = max(alpha_val, min_alpha)
         mode_label = "Manual Settings"
 
-    # 6. Fit the Active Model
-    final_model = ElasticNet(alpha=active_alpha, l1_ratio=active_l1, random_state=42, max_iter=20000)
-    
+    # 5. Fit Elastic Net
+    model = ElasticNet(alpha=alpha_val, l1_ratio=l1_ratio_val, max_iter=10000, random_state=42)
     pipe = Pipeline([
         ('preprocessor', preprocessor),
-        ('regressor', final_model)
+        ('regressor', model)
     ])
-
-    try:
+    
+    with warnings.catch_warnings():
+        warnings.filterwarnings("ignore", category=UserWarning)
+        warnings.filterwarnings("ignore", category=ConvergenceWarning)
         pipe.fit(X, y)
-    except Exception as e:
-        return go.Figure(), f"Model Fitting Error: {str(e)}"
 
     y_pred = pipe.predict(X)
 
-    # 7. Statistics
+    # 6. Statistics
     mse = mean_squared_error(y, y_pred)
     rmse = np.sqrt(mse)
     r2 = r2_score(y, y_pred)
-    
-    # Extract Coefficients
-    regressor = pipe.named_steps['regressor']
+
+    # Extract coefficients
     try:
+        regressor = pipe.named_steps['regressor']
         feature_names = pipe.named_steps['preprocessor'].get_feature_names_out()
         coeffs = regressor.coef_
-        
         coef_df = pd.DataFrame({'Feature': feature_names, 'Coefficient': coeffs})
         coef_df['Abs_Val'] = coef_df['Coefficient'].abs()
         coef_df = coef_df.sort_values(by='Abs_Val', ascending=False)
-        
+
         coef_str = ""
-        for _, row in coef_df.head(20).iterrows(): 
+        for _, row in coef_df.head(20).iterrows():
             clean_name = row['Feature'].replace('num__', '').replace('cat__', '')
             coef_str += f"\n• {clean_name}: {row['Coefficient']:.4f}"
-            
     except Exception:
         coef_str = "\n(Could not extract coefficients)"
 
-    # Formatted Output showing BOTH Current and Optimal
     stats = (f"**Mode:** {mode_label}\n"
-             f"**Current Alpha:** {active_alpha:.4f} (Optimal: {optimal_alpha:.4f})\n"
-             f"**Current L1 Ratio:** {active_l1:.4f} (Optimal: {optimal_l1:.4f})\n"
+             f"**Alpha:** {alpha_val:.5f}\n"
+             f"**L1 Ratio:** {l1_ratio_val:.4f}\n"
              f"**RMSE:** {rmse:.4f}\n"
              f"**R² Score:** {r2:.4f}\n"
              f"**Intercept:** {regressor.intercept_:.4f}\n"
              f"**Top Coefficients:**{coef_str}")
 
-    # 8. Plot
+    # 7. Plot
     fig = px.scatter(
         x=y, y=y_pred, 
         labels={'x': 'Actual Score', 'y': 'Predicted Score'},
@@ -139,7 +141,6 @@ def run_elastic_net(df, selected_features, alpha_val=0, l1_ratio_val=0.5):
         yshift=10,
         font=dict(color="red")
     )
-    
     fig.update_layout(template="plotly_white")
 
     return fig, stats

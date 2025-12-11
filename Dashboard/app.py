@@ -8,8 +8,12 @@ from KNN import knn_model
 import os
 from spline import run_spline_regression
 from elastic import run_elastic_net
+from kmeans import cluster_and_plot_latent
+import plotly.graph_objects as go
 
-df = pd.read_csv('../data/clean/Cleaned_Data.csv')
+
+
+df = pd.read_csv('./data/clean/Cleaned_Data.csv')
 #add log transformations
 df['log_followers_count'] = np.log(df['followers_count']+1)
 df['log_length'] = np.log(df['length']+1)
@@ -94,51 +98,7 @@ app.layout = html.Div(style={'fontFamily': 'Arial, sans-serif', 'backgroundColor
         ]),
 
         # Models Tab
-        dcc.Tab(label="Models", children=[
-            html.Div(style=card_style, children=[
-                html.H3("Model Filters & Outputs"),
-
-                html.Div([
-                    html.Label("Album Year Range:"),
-                    dcc.RangeSlider(
-                        id='year-slider',
-                        min=int(df['album_year'].dropna().min()),
-                        max=int(df['album_year'].dropna().max()),
-                        step=1,
-                        value=[int(df['album_year'].min()), int(df['album_year'].max())],
-                        marks={y: str(y) for y in range(int(df['album_year'].min()), int(df['album_year'].max())+1, 5)},
-                        tooltip={"placement": "bottom", "always_visible": True}
-                    )
-                ], style=slider_style),
-
-                html.Div([
-                    html.Label("Followers Count Range:"),
-                    dcc.RangeSlider(
-                        id='followers-slider',
-                        min=int(df['followers_count'].dropna().min()),
-                        max=int(df['followers_count'].dropna().max()),
-                        value=[int(df['followers_count'].min()), int(df['followers_count'].max())],
-                        tooltip={"placement": "bottom", "always_visible": True}
-                    )
-                ], style=slider_style),
-
-                html.Div([
-                    html.Label("Train/Test Split (%)"),
-                    dcc.Slider(
-                        id='train-test-slider',
-                        min=50,
-                        max=90,
-                        step=5,
-                        value=80,
-                        marks={i: f"{i}%" for i in range(50, 95, 5)},
-                        tooltip={"placement": "bottom", "always_visible": True}
-                    )
-                ], style=slider_style),
-
-                html.Div(id='model-output', children=[
-                    html.P("Model outputs will appear here.")
-                ], style={'marginTop': '30px'})
-            ]), 
+        dcc.Tab(label="Supervised Models", children=[
 
             #Elastic Net
             html.Div(style=card_style, children=[
@@ -289,16 +249,50 @@ app.layout = html.Div(style={'fontFamily': 'Arial, sans-serif', 'backgroundColor
         ]),
 
         # PCA Tab
-        dcc.Tab(label="PCA Analysis", children=[
+        dcc.Tab(label="Unsupervised Models", children=[
             html.Div(style=card_style, children=[
                 html.H3("Principal Component Analysis"),
-                dcc.Graph(id="pca_scree_plot"),
-                dcc.Graph(id="pca_cumulative_plot"),
+                # --- TOGGLE: PCA vs K-Means ---
+                dcc.RadioItems(
+                    id="pca_kmeans_toggle",
+                    options=[
+                        {"label": "PCA", "value": "pca"},
+                        {"label": "K-Means", "value": "kmeans"},
+                    ],
+                    value="pca",
+                    inline=True,
+                    style={"marginBottom": "20px", "fontSize": "16px"}
+                ),
+                html.Div(
+                    id="kmeans_slider_container",
+                    style={"marginBottom": "20px"},  # default style; we'll toggle display
+                    children=[
+                        html.Label("Select Number of Clusters (K) for K-Means:"),
+                        dcc.Slider(
+                            id="kmeans-k-slider",
+                            min=1,
+                            max=20,
+                            step=1,
+                            value=5,
+                            marks={i: str(i) for i in range(1, 21)},
+                            tooltip={"placement": "bottom", "always_visible": True}
+                        )
+                    ]
+                ),
+                dcc.Graph(id="pca_scree_plot", style={"display": "block"}),
+                dcc.Graph(id="pca_cumulative_plot", style={"display": "block"}),
                 dcc.Graph(id="pca_scatter_plot"),
-                dash_table.DataTable(id="pca_loadings_table",
-                                    columns=[{"name": col, "id": col} for col in ["Feature"] + [f"PC{i}" for i in range(1,9)]],
-                                    style_table={'overflowX':'auto'},
-                                    style_cell={'textAlign':'left'})
+                html.Div(
+                    id="pca_table_container",
+                    children=[
+                        dash_table.DataTable(
+                            id="pca_loadings_table",
+                            columns=[{"name": col, "id": col} for col in ["Feature"] + [f"PC{i}" for i in range(1,9)]],
+                            style_table={'overflowX':'auto'},
+                            style_cell={'textAlign':'left'}
+                        )
+                    ]
+                )
             ])
         ])
     ])
@@ -333,17 +327,52 @@ def update_eda(_):
         figs["top_artists_by_reviews"]
     )
 
+# PCA and Kmeans Callback
 @app.callback(
     Output("pca_scree_plot", "figure"),
     Output("pca_cumulative_plot", "figure"),
     Output("pca_scatter_plot", "figure"),
     Output("pca_loadings_table", "data"),
-    Input("dummy-eda-trigger", "children")
+    Output("pca_scree_plot", "style"),
+    Output("pca_cumulative_plot", "style"),
+    Output("pca_scatter_plot", "style"),
+    Output("pca_table_container", "style"),
+    Output("kmeans_slider_container", "style"),  # <-- new output
+    Input("pca_kmeans_toggle", "value"),
+    Input("kmeans-k-slider", "value")
 )
-def update_pca(_):
-    figs = run_pca(df)
-    loadings_df = figs["loadings"].reset_index().rename(columns={"index":"Feature"})
-    return figs["scree"], figs["cumulative"], figs["scatter"], loadings_df.to_dict("records")
+def update_pca_or_kmeans(selected_method, k_value):
+    if selected_method == "pca":
+        figs = run_pca(df)
+        loadings_df = figs["loadings"].reset_index().rename(columns={"index":"Feature"})
+        return (
+            figs["scree"], 
+            figs["cumulative"], 
+            figs["scatter"], 
+            loadings_df.to_dict("records"),
+            {"display": "block"},   # show scree
+            {"display": "block"},   # show cumulative
+            {"display": "block"},   # show scatter
+            {"display": "block"},   # show table
+            {"display": "none"}     # hide slider for PCA
+        )
+    else:
+        numeric_cols = ["score", "log_length", "log_followers_count"]
+        categorical_cols = []
+        plot_df, kmeans_model, pca_model, kmeans_fig = cluster_and_plot_latent(
+            df, numeric_cols, categorical_cols, n_clusters=k_value
+        )
+        return (
+            go.Figure(),             # empty scree
+            go.Figure(),             # empty cumulative
+            kmeans_fig,              # KMeans scatter
+            [],                      # empty table
+            {"display": "none"},     # hide scree
+            {"display": "none"},     # hide cumulative
+            {"display": "block"},    # show KMeans scatter
+            {"display": "none"},     # hide table
+            {"display": "block"}     # show slider for K-Means
+        )
 
 # Elastic Net Callback
 @app.callback(

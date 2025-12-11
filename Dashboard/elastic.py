@@ -51,7 +51,7 @@ def run_elastic_net(df, selected_features, alpha_val=0, l1_ratio_val=0.5):
     # We always run this to show the user what the "Best" values are
     try:
         l1_ratios_to_test = [0.1, 0.5, 0.7, 0.9, 0.95, 0.99, 1.0]
-        cv_model = ElasticNetCV(l1_ratio=l1_ratios_to_test, cv=5, random_state=42, n_jobs=-1)
+        cv_model = ElasticNetCV(l1_ratio=l1_ratios_to_test, cv=5, random_state=42, n_jobs=-1, max_iter=20000)
         
         cv_pipe = Pipeline([
             ('preprocessor', preprocessor),
@@ -78,7 +78,7 @@ def run_elastic_net(df, selected_features, alpha_val=0, l1_ratio_val=0.5):
         mode_label = "Manual Settings"
 
     # 6. Fit the Active Model
-    final_model = ElasticNet(alpha=active_alpha, l1_ratio=active_l1, random_state=42)
+    final_model = ElasticNet(alpha=active_alpha, l1_ratio=active_l1, random_state=42, max_iter=20000)
     
     pipe = Pipeline([
         ('preprocessor', preprocessor),

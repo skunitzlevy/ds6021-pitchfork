@@ -11,8 +11,6 @@ from elastic import run_elastic_net
 from kmeans import cluster_and_plot_latent
 import plotly.graph_objects as go
 
-
-
 df = pd.read_csv('../data/clean/Cleaned_Data.csv')
 
 with open("../README.md", "r", encoding="utf-8") as f:
@@ -42,19 +40,16 @@ card_style = {
 
 slider_style = {'margin': '15px 0'}
 
-# App Layout
 app.layout = html.Div(style={'fontFamily': 'Arial, sans-serif', 'backgroundColor': '#f4f6f8', 'padding': '20px'}, children=[
     html.H1("🎵 Pitchfork Project Dashboard", style={'textAlign': 'center', 'marginBottom': '30px'}),
     
     dcc.Tabs([
-        # README Tab
         dcc.Tab(label="README", children=[
             html.Div(style=card_style, children=[
                 dcc.Markdown(readme_text, link_target="_blank")
             ])
         ]),
 
-        # Data Preview Tab
         dcc.Tab(label="Data Preview", children=[
             html.Div(style=card_style, children=[
                 html.Div([
@@ -84,7 +79,6 @@ app.layout = html.Div(style={'fontFamily': 'Arial, sans-serif', 'backgroundColor
             ])
         ]),
 
-        # EDA Tab
         dcc.Tab(label="EDA", children=[
             html.Div(style=card_style, children=[
                 html.H3("Exploratory Data Analysis"),
@@ -98,11 +92,25 @@ app.layout = html.Div(style={'fontFamily': 'Arial, sans-serif', 'backgroundColor
             ])
         ]),
 
-        # Supervised Models Tab
         dcc.Tab(label="Supervised Models", children=[
-
-            #Elastic Net
+            
             html.Div(style=card_style, children=[
+                html.Label("Select Model:", style={'fontWeight': 'bold', 'fontSize': '18px', 'marginBottom': '10px', 'display': 'block'}),
+                dcc.RadioItems(
+                    id="supervised_model_toggle",
+                    options=[
+                        {"label": "Elastic Net", "value": "elastic"},
+                        {"label": "Linear Regression", "value": "linear"},
+                        {"label": "Spline Regression", "value": "spline"},
+                        {"label": "KNN Classifier", "value": "knn"},
+                    ],
+                    value="elastic",
+                    inline=True,
+                    style={"fontSize": "16px"}
+                )
+            ]),
+
+            html.Div(id="elastic_container", style=card_style, children=[
                 html.H3("Elastic Net Regression"),
                 html.P("Linear regression with combined L1 (Lasso) and L2 (Ridge) regularization."),
                 
@@ -110,13 +118,11 @@ app.layout = html.Div(style={'fontFamily': 'Arial, sans-serif', 'backgroundColor
                     html.Label(html.Strong("Select Independent Variables (X):")),
                     dcc.Checklist(
                         id='elastic-feature-checklist',
-                        options=[{'label': col, 'value': col} for col in df.select_dtypes(include=[np.number]).columns if col not in ['score', 'sqrt_score']],
-                        value=[col for col in df.select_dtypes(include=[np.number]).columns if col not in ['score', 'sqrt_score', 'sq_length']],
+                        options=[{'label': col, 'value': col} for col in df.select_dtypes(include=[np.number]).columns if col not in ['score', 'sqrt_score']] + [{'label': 'main_genre', 'value': 'main_genre'}],                        value=[col for col in df.select_dtypes(include=[np.number]).columns if col not in ['score', 'sqrt_score', 'sq_length']],
                         inline=True,
                         style={'fontSize': '16px', 'marginTop': '10px'}
                     ),
                     
-                    # Alpha Slider
                     html.Label("Alpha (Regularization Strength):", style={'marginTop': '20px', 'fontWeight': 'bold'}),
                     html.P("Set to 0 to auto-optimize Alpha.", style={'fontSize': '12px', 'color': 'gray'}),
                     dcc.Slider(
@@ -126,7 +132,6 @@ app.layout = html.Div(style={'fontFamily': 'Arial, sans-serif', 'backgroundColor
                         tooltip={"placement": "bottom", "always_visible": True}
                     ),
 
-                    # L1 Ratio Slider
                     html.Label("L1 Ratio (Mix of Lasso/Ridge):", style={'marginTop': '20px', 'fontWeight': 'bold'}),
                     html.P("0 = Ridge, 1 = Lasso. (Ignored if Alpha is Auto)", style={'fontSize': '12px', 'color': 'gray'}),
                     dcc.Slider(
@@ -146,8 +151,7 @@ app.layout = html.Div(style={'fontFamily': 'Arial, sans-serif', 'backgroundColor
                 ])
             ]),
 
-            # Linear Regression
-            html.Div(style=card_style, children=[
+            html.Div(id="linear_container", style=card_style, children=[
                 html.H3("Linear Regression"),
                 html.P("Toggle variables below to predict the Pitchfork Score.", style={'marginBottom': '15px'}),
                 
@@ -155,8 +159,7 @@ app.layout = html.Div(style={'fontFamily': 'Arial, sans-serif', 'backgroundColor
                     html.Label(html.Strong("Select Independent Variables (X):")),
                     dcc.Checklist(
                         id='lr-feature-checklist',
-                        options=[{'label': col, 'value': col} for col in df.select_dtypes(include=[np.number]).columns if col not in ['score','sqrt_score']],
-                        value=['log_length', 'log_followers_count', 'log_review_release_difference'],
+                        options=[{'label': col, 'value': col} for col in df.select_dtypes(include=[np.number]).columns if col not in ['score', 'sqrt_score']] + [{'label': 'main_genre', 'value': 'main_genre'}],                        value=['log_length', 'log_followers_count', 'log_review_release_difference'],
                         inline=True,
                         style={'fontSize': '16px', 'marginTop': '10px'}
                     ),
@@ -174,8 +177,7 @@ app.layout = html.Div(style={'fontFamily': 'Arial, sans-serif', 'backgroundColor
                 ])
             ]),
 
-            # Spline reg
-            html.Div(style=card_style, children=[
+            html.Div(id="spline_container", style=card_style, children=[
                 html.H3("Spline Regression (Multi-Variable)"),
                 html.P("Fits a spline model"),
                 
@@ -214,8 +216,7 @@ app.layout = html.Div(style={'fontFamily': 'Arial, sans-serif', 'backgroundColor
                 ])
             ]),
 
-            # KNN
-            html.Div(style=card_style, children=[
+            html.Div(id="knn_container", style=card_style, children=[
                 html.H3("K-Nearest Neighbors Classifier"),
                 html.P("Classify 'Main Genre' based on audio features."),
                 
@@ -247,7 +248,6 @@ app.layout = html.Div(style={'fontFamily': 'Arial, sans-serif', 'backgroundColor
             ])
         ]),
 
-        # Unsupervised Models Tab
         dcc.Tab(label="Unsupervised Models", children=[
             html.Div(style=card_style, children=[
                 html.H3("Principal Component Analysis"),
@@ -296,7 +296,26 @@ app.layout = html.Div(style={'fontFamily': 'Arial, sans-serif', 'backgroundColor
     ])
 ])
 
-# Callbacks
+@app.callback(
+    [Output("elastic_container", "style"),
+     Output("linear_container", "style"),
+     Output("spline_container", "style"),
+     Output("knn_container", "style")],
+    [Input("supervised_model_toggle", "value")]
+)
+def toggle_supervised_models(selected_model):
+    elastic_style = card_style.copy()
+    linear_style = card_style.copy()
+    spline_style = card_style.copy()
+    knn_style = card_style.copy()
+
+    elastic_style['display'] = 'block' if selected_model == 'elastic' else 'none'
+    linear_style['display'] = 'block' if selected_model == 'linear' else 'none'
+    spline_style['display'] = 'block' if selected_model == 'spline' else 'none'
+    knn_style['display'] = 'block' if selected_model == 'knn' else 'none'
+
+    return elastic_style, linear_style, spline_style, knn_style
+
 @app.callback(
     Output('data-table', 'data'),
     Output('data-table', 'page_size'),
@@ -325,7 +344,6 @@ def update_eda(_):
         figs["top_artists_by_reviews"]
     )
 
-# PCA and Kmeans Callback
 @app.callback(
     Output("pca_scree_plot", "figure"),
     Output("pca_cumulative_plot", "figure"),
@@ -372,7 +390,6 @@ def update_pca_or_kmeans(selected_method, k_value):
             {"display": "block"}
         )
 
-# Elastic Net Callback
 @app.callback(
     [Output('elastic-graph', 'figure'),
      Output('elastic-stats', 'children')],
@@ -383,7 +400,6 @@ def update_pca_or_kmeans(selected_method, k_value):
 def update_elastic_graph(selected_features, alpha, l1_ratio):
     return run_elastic_net(df, selected_features, alpha_val=alpha, l1_ratio_val=l1_ratio)
 
-# Linear Regression Callback
 @app.callback(
     [Output('lr-graph', 'figure'),
      Output('lr-stats', 'children')],
@@ -393,7 +409,6 @@ def update_lr_graph(selected_features):
     fig, stats = run_linear_regression(df, selected_features)
     return fig, stats
 
-# Spline Regression Callback
 @app.callback(
     [Output('spline-graph', 'figure'),
      Output('spline-stats', 'children')],
@@ -403,7 +418,6 @@ def update_lr_graph(selected_features):
 def update_spline_graph(selected_features, knot_quantile):
     return run_spline_regression(df, selected_features, knot_quantile)
 
-# KNN Callback
 @app.callback(
     [Output('knn-graph', 'figure'),
      Output('knn-stats', 'children')],

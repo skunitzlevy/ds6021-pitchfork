@@ -50,15 +50,15 @@ def run_elastic_net(df, selected_features, alpha_val=None, l1_ratio_val=0.5):
     preprocessor = ColumnTransformer(transformers=transformers)
 
     # 4. Determine alpha and l1_ratio
-    min_alpha = 1e-4  # slightly higher to improve convergence
+    min_alpha = 1e-4 
     if alpha_val is None or alpha_val <= 0:
         try:
             l1_ratios_to_test = [0.1, 0.5, 0.7, 0.9, 0.95, 0.99, 1.0]
             cv_model = ElasticNetCV(
                 l1_ratio=l1_ratios_to_test,
-                cv=3,            # fewer folds for low memory/CPU
-                n_jobs=1,        # single-threaded
-                max_iter=10000,  # moderate iteration increase
+                cv=3,        
+                n_jobs=1,      
+                max_iter=10000,  
                 eps=1e-3,
                 random_state=42
             )

@@ -8,17 +8,8 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import accuracy_score, balanced_accuracy_score, confusion_matrix
 
 def knn_model(df, target_col='main_genre', n_neighbors=5):
-    """
-    Low-memory KNN for Render.
-    - No one-hot encoding (uses hashing instead)
-    - No ColumnTransformer
-    - No GridSearch
-    - Uses KD-Tree KNN for memory efficiency
-    """
 
-    # -----------------------------
     # 1. Select usable features
-    # -----------------------------
     numeric_features = ['score', 'album_year', 'length', 
                         'followers_count', 'reviewer_reviews', 'artist_reviews']
     categorical_features = ['label']
@@ -32,18 +23,14 @@ def knn_model(df, target_col='main_genre', n_neighbors=5):
     if data.empty:
         return go.Figure(), [html.P("No usable data available.")]
 
-    # -----------------------------
-    # 2. Simple category hashing (fixed memory)
-    # -----------------------------
+    # 2. Simple category hashing
     def hash_category(col):
         return col.astype(str).apply(lambda x: hash(x) % 5000)
 
     for c in available_cat:
         data[c] = hash_category(data[c])
 
-    # -----------------------------
     # 3. Split
-    # -----------------------------
     np.random.seed(42)
     mask = np.random.rand(len(data)) < 0.8
     train = data[mask]
@@ -55,16 +42,12 @@ def knn_model(df, target_col='main_genre', n_neighbors=5):
     X_test = test.drop(columns=[target_col])
     y_test = test[target_col]
 
-    # -----------------------------
-    # 4. Scale numeric features only (fast)
-    # -----------------------------
+    # 4. Scale numeric features only
     scaler = StandardScaler()
     X_train[available_numeric] = scaler.fit_transform(X_train[available_numeric])
     X_test[available_numeric] = scaler.transform(X_test[available_numeric])
 
-    # -----------------------------
-    # 5. KNN — use KD-Tree (memory-efficient)
-    # -----------------------------
+    # 5. KNN
     knn = KNeighborsClassifier(
         n_neighbors=n_neighbors,
         weights="distance",
@@ -75,15 +58,11 @@ def knn_model(df, target_col='main_genre', n_neighbors=5):
     knn.fit(X_train, y_train)
     y_pred = knn.predict(X_test)
 
-    # -----------------------------
     # 6. Metrics
-    # -----------------------------
     acc = accuracy_score(y_test, y_pred)
     bal_acc = balanced_accuracy_score(y_test, y_pred)
 
-    # -----------------------------
     # 7. Confusion matrix
-    # -----------------------------
     cm = confusion_matrix(y_test, y_pred, labels=knn.classes_)
 
     fig = px.imshow(

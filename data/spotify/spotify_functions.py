@@ -27,12 +27,8 @@ def get_access_token():
 
     data = {
         "grant_type": "client_credentials",
-        # My credentials
-        "client_id": "512c04e69d75438fa0bc9eafc6161bff",
-        "client_secret": "3cc9d762a3634d528634fb63ad91ce33"
-        # Sam's credentials
-        #"client_id": "731a211784ff46a0b4cfb74e9522a3d0",
-        #"client_secret": "839d02263663465a8ca4785d9e05ec2a"
+        "client_id": os.getenv("SPOTIFY_CLIENT_ID"),
+        "client_secret": os.getenv("SPOTIFY_CLIENT_SECRET")
     }
 
     response = requests.post(url, headers=headers, data=data)

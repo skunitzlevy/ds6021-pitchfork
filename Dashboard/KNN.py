@@ -1,3 +1,16 @@
+import pandas as pd
+import numpy as np
+import plotly.express as px
+import plotly.graph_objects as go
+from dash import html, dcc
+from sklearn.model_selection import train_test_split
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.pipeline import Pipeline
+from sklearn.compose import ColumnTransformer
+from sklearn.preprocessing import StandardScaler, OneHotEncoder
+from sklearn.metrics import accuracy_score, balanced_accuracy_score, confusion_matrix
+
+
 def knn_model(df, target_col='main_genre', n_neighbors=None):
     """
     Memory-safe + accuracy-preserving KNN.

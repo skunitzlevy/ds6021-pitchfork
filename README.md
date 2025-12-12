@@ -91,7 +91,6 @@ python Dashboard/app.py
 
 ### Supervised Learning (Predicting Review Scores)
 - **Linear Regression** - Baseline linear relationship modeling
-- **Polynomial Regression** - Non-linear feature relationships
 - **Elastic Net** - Regularized regression (L1 + L2 penalties)
 - **Spline Regression** - Non-parametric fitting with knots
 - **K-Nearest Neighbors** - Genre classification
